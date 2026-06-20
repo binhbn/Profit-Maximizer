@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenWay Profit Maximizer – Ngừng Chảy Máu Lợi Nhuận trong 5 Tuần</title>
+  <meta name="description" content="Chương trình coaching 5 tuần dành cho Amazon Sellers $10K–$50K/tháng đang chảy máu lợi nhuận vì Ads. Xây hệ thống ra quyết định theo data, không theo cảm tính." />
+  <link rel="icon" type="image/png" href="assets/logo-icon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────── */
+    :root {
+      --green:       #4C8C2B;
+      --green-dark:  #2E5E1A;
+      --green-light: #A8D08D;
+      --green-bg:    #EEF5E8;
+      --gold:        #C9A24D;
+      --gray:        #6B6B6B;
+      --gray-dark:   #2B2B2B;
+      --gray-light:  #F5F5F5;
+      --white:       #FFFFFF;
+      --border:      #DDE8D4;
+
+      --font-head: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-data: 'Roboto Mono', monospace;
+
+      --radius: 8px;
+      --shadow: 0 2px 16px rgba(44,94,26,0.08);
+    }
+
+    /* ─── RESET ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      background: var(--white);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── UTILITY ────────────────────────────────── */
+    .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 72px 0; }
+    .section-alt { background: var(--gray-light); }
+    .section-dark { background: var(--green-dark); color: var(--white); }
+    .section-green { background: var(--green-bg); }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-bg);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    h1 { font-family: var(--font-head); font-size: clamp(30px, 4vw, 48px); font-weight: 800; line-height: 1.15; }
+    h2 { font-family: var(--font-head); font-size: clamp(22px, 3vw, 36px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+    h3 { font-family: var(--font-head); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    p  { color: var(--gray); margin-bottom: 16px; }
+    .lead { font-size: 17px; line-height: 1.75; }
+
+    .text-green { color: var(--green); }
+    .text-gold  { color: var(--gold); font-family: var(--font-data); font-weight: 600; }
+    .text-white { color: var(--white); }
+    .text-center { text-align: center; }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+      border: none;
+    }
+    .btn:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-primary { background: var(--green); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+    .btn-gold    { background: var(--gold); color: var(--white); }
+    .btn-lg { font-size: 17px; padding: 18px 42px; }
+
+    /* Divider */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    /* ─── NAVBAR ─────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .navbar .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .navbar .brand {
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+    .nav-cta { font-size: 14px; padding: 10px 22px; }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      background: var(--green-dark);
+      padding: 80px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(76,140,43,.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; }
+    .hero .eyebrow {
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 20px;
+    }
+    .hero h1 { color: var(--white); margin-bottom: 24px; max-width: 780px; }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero .subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,.75);
+      max-width: 620px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .hero-cta-group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-note {
+      font-size: 13px;
+      color: rgba(255,255,255,.5);
+      margin-top: 20px;
+      font-family: var(--font-data);
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      background: var(--green);
+      padding: 20px 0;
+    }
+    .stats-strip .inner {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-family: var(--font-data);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .stat-item .lbl {
+      font-size: 12px;
+      color: rgba(255,255,255,.8);
+      font-family: var(--font-head);
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    /* ─── PROBLEM ────────────────────────────────── */
+    .problem-intro { font-size: 18px; line-height: 1.85; max-width: 720px; }
+    .problem-intro strong { color: var(--gray-dark); }
+
+    .root-causes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .cause-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      border-left: 4px solid var(--green);
+    }
+    .cause-card .num {
+      font-family: var(--font-data);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--green-light);
+      margin-bottom: 8px;
+    }
+    .cause-card h3 { color: var(--gray-dark); font-size: 15px; margin-bottom: 8px; }
+    .cause-card p  { font-size: 14px; margin: 0; }
+
+    /* ─── COST OF INACTION ───────────────────────── */
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .cost-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .cost-card .icon { font-size: 24px; margin-bottom: 10px; }
+    .cost-card p { color: rgba(255,255,255,.75); font-size: 14px; margin: 0; }
+    .cost-card strong { color: var(--gold); }
+
+    /* ─── SOLUTION ───────────────────────────────── */
+    .solution-box {
+      background: var(--green-bg);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--green);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .solution-box p { color: var(--gray-dark); font-size: 16px; line-height: 1.8; margin: 0; }
+    .solution-box strong { color: var(--green); }
+
+    /* Overview table */
+    .overview-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+    }
+    .overview-table th, .overview-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-table th {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--green-bg);
+      color: var(--green-dark);
+    }
+    .overview-table td:first-child {
+      font-weight: 600;
+      color: var(--gray-dark);
+      width: 160px;
+      white-space: nowrap;
+    }
+    .overview-table tr:hover td { background: var(--green-bg); }
+
+    /* ─── ROADMAP ────────────────────────────────── */
+    .roadmap { margin-top: 40px; }
+    .week-card {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0;
+      margin-bottom: 12px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .week-num {
+      background: var(--green-dark);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 12px;
+      text-align: center;
+    }
+    .week-num .wn {
+      font-family: var(--font-data);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green-light);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .week-num .wd {
+      font-family: var(--font-head);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .week-body {
+      background: var(--white);
+      padding: 18px 22px;
+    }
+    .week-body h3 { font-size: 15px; color: var(--green-dark); margin-bottom: 6px; }
+    .week-body p  { font-size: 13.5px; color: var(--gray); margin: 0 0 8px; }
+    .week-result {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-data);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--green-bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .bonus-week {
+      background: #FFF8EC;
+      border: 1px dashed var(--gold);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .bonus-week p { font-size: 13.5px; color: var(--gray); margin: 0; }
+
+    /* ─── DELIVERABLES ───────────────────────────── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .del-group { }
+    .del-group h3 {
+      font-size: 13px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green);
+      border-bottom: 2px solid var(--green-bg);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .del-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .del-item .icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: white;
+      margin-top: 2px;
+    }
+    .del-item span { font-size: 14px; color: var(--gray); line-height: 1.55; }
+
+    /* ─── TESTIMONIALS ───────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .testi-header {
+      background: var(--green-dark);
+      padding: 18px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .testi-metrics { }
+    .metric-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .metric-val {
+      font-family: var(--font-data);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .metric-lbl { font-size: 12px; color: rgba(255,255,255,.7); }
+    .testi-body { padding: 22px; }
+    .testi-quote {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 14px;
+      border-left: 3px solid var(--green-light);
+      padding-left: 14px;
+    }
+    .testi-author { font-size: 13px; font-weight: 600; color: var(--gray-dark); }
+    .testi-role   { font-size: 12px; color: var(--gray); }
+
+    /* ─── FIT / CRITERIA ─────────────────────────── */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    @media (max-width: 640px) { .fit-grid { grid-template-columns: 1fr; } }
+    .fit-box {
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .fit-box.yes { background: var(--green-bg); border-color: var(--green); }
+    .fit-box.no  { background: #FFF5F5; border-color: #E8BFBF; }
+    .fit-box h3  { font-size: 14px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 16px; }
+    .fit-box.yes h3 { color: var(--green); }
+    .fit-box.no  h3 { color: #B94444; }
+    .fit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .fit-item .dot {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      margin-top: 2px;
+    }
+    .yes .dot { background: var(--green); }
+    .no  .dot { background: #B94444; }
+
+    /* ─── COACH ──────────────────────────────────── */
+    .coach-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    @media (max-width: 640px) { .coach-layout { grid-template-columns: 1fr; gap: 24px; } }
+    .coach-avatar {
+      width: 200px;
+      height: 260px;
+      border-radius: 12px;
+      background: var(--green-bg);
+      border: 3px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .coach-name { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
+    .coach-title { font-size: 14px; color: var(--green); font-weight: 600; margin-bottom: 20px; }
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .badge {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--green-bg);
+      color: var(--green-dark);
+      border: 1px solid var(--border);
+    }
+    .coach-story {
+      background: var(--gray-light);
+      border-radius: var(--radius);
+      padding: 20px;
+      border-left: 4px solid var(--gold);
+      margin-top: 16px;
+    }
+    .coach-story p { font-size: 14px; color: var(--gray); margin: 0; line-height: 1.75; }
+
+    /* ─── FAQ ────────────────────────────────────── */
+    .faq { margin-top: 36px; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--gray-dark);
+      background: var(--white);
+      transition: background .15s;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+    .faq-q:hover { background: var(--green-bg); }
+    .faq-q .icon { flex-shrink: 0; font-size: 18px; color: var(--green); transition: transform .2s; }
+    .faq-q.open .icon { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 22px 18px;
+      font-size: 14.5px;
+      color: var(--gray);
+      line-height: 1.75;
+      background: var(--white);
+    }
+    .faq-a.open { display: block; }
+
+    /* ─── JOURNEY ────────────────────────────────── */
+    .journey {
+      background: var(--green-dark);
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 36px;
+    }
+    .journey h3 { color: var(--white); font-size: 15px; margin-bottom: 20px; }
+    .journey-steps { display: flex; flex-direction: column; gap: 12px; }
+    .j-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,.06);
+      border-radius: 6px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .j-step.active {
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .j-step .step-num {
+      font-family: var(--font-data);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green-light);
+      flex-shrink: 0;
+    }
+    .j-step.active .step-num { color: rgba(255,255,255,.8); }
+    .j-step .step-name {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(255,255,255,.85);
+    }
+    .j-step.active .step-name { color: var(--white); }
+    .j-step .step-desc { font-size: 12px; color: rgba(255,255,255,.55); margin-left: auto; }
+    .j-step.active .step-desc { color: rgba(255,255,255,.8); }
+    .you-are-here {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--gold);
+      color: var(--white);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    /* ─── CTA SECTION ────────────────────────────── */
+    .cta-section {
+      background: var(--green-dark);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(76,140,43,.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-section .container { position: relative; }
+    .cta-section h2 { color: var(--white); margin-bottom: 14px; }
+    .cta-section .sub { color: rgba(255,255,255,.7); font-size: 16px; max-width: 560px; margin: 0 auto 32px; }
+    .cta-contact {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+    }
+    .contact-item .label { font-family: var(--font-data); color: var(--green-light); font-size: 12px; }
+    .contact-item a { color: var(--white); font-weight: 500; }
+    .contact-item a:hover { color: var(--gold); }
+
+    /* Cohort badge */
+    .cohort-badge {
+      display: inline-block;
+      background: rgba(201,162,77,.15);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: 10px 22px;
+      margin-bottom: 28px;
+      font-family: var(--font-data);
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    .footer {
+      background: var(--gray-dark);
+      padding: 28px 0;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 13px;
+      color: rgba(255,255,255,.4);
+      margin: 0;
+      font-family: var(--font-head);
+    }
+    .footer span { color: var(--green-light); }
+
+    /* ─── COMPARE TABLE ──────────────────────────── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      font-size: 14px;
+    }
+    .compare-table thead th {
+      padding: 12px 16px;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--green-dark);
+      color: var(--white);
+    }
+    .compare-table thead th:first-child { text-align: left; }
+    .compare-table tbody td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      color: var(--gray);
+    }
+    .compare-table tbody td:first-child { text-align: left; color: var(--gray-dark); font-weight: 500; }
+    .compare-table tbody tr:hover td { background: var(--green-bg); }
+    .compare-table .yes-cell { color: var(--green); font-weight: 700; }
+    .compare-table .no-cell  { color: #B94444; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 768px) {
+      .section { padding: 48px 0; }
+      .coach-layout { grid-template-columns: 1fr; }
+      .coach-avatar { width: 100%; height: 180px; }
+      .week-card { grid-template-columns: 70px 1fr; }
+      .j-step .step-desc { display: none; }
+    }
+    @media (max-width: 480px) {
+      .stats-strip .inner { gap: 24px; }
+      .hero-cta-group { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Sticky bottom CTA for mobile */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--green);
+      padding: 14px 24px;
+      z-index: 200;
+      justify-content: center;
+    }
+    .sticky-cta a {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+    }
+    @media (max-width: 640px) { .sticky-cta { display: flex; } }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ──────────────────────────────────── -->
+<nav class="navbar">
+  <div class="inner">
+    <div class="brand">
+      <img src="assets/logo-full.png" alt="ECom GreenWay" class="nav-logo" />
+    </div>
+    <a href="#register" class="btn btn-primary nav-cta">Đăng ký tư vấn</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">ECom GreenWay Academy · Profit Maximizer Cohort</p>
+    <h1>
+      Doanh số tăng.<br>
+      Lợi nhuận <em>biến mất</em>.<br>
+      5 tuần để fix điều đó.
+    </h1>
+    <p class="subtitle">
+      Chương trình coaching giúp Amazon Sellers $10K–$50K/tháng ngừng chảy máu lợi nhuận
+      bằng hệ thống ra quyết định Ads &amp; Listing theo data — không theo cảm tính.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#register" class="btn btn-gold btn-lg">Đăng ký tư vấn ngay →</a>
+      <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
+    </div>
+    <p class="hero-note">Mỗi cohort tối đa 5 team · Mở đăng ký theo đợt</p>
+  </div>
+</section>
+
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="inner">
+    <div class="stat-item">
+      <div class="num">+70%</div>
+      <div class="lbl">Lợi nhuận Team Hoàn</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">+46%</div>
+      <div class="lbl">Net Profit Team Tuyến</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5 tuần</div>
+      <div class="lbl">Thay đổi đo được</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5 team</div>
+      <div class="lbl">Mỗi cohort tối đa</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PROBLEM ───────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="tag">Vấn đề</span>
+    <h2>Bạn không thiếu kiến thức.<br>Bạn thiếu hệ thống.</h2>
+    <p class="problem-intro lead">
+      Mỗi ngày mở Seller Central, nhìn Ads spend tăng — nhưng cuối tháng nhìn profit gần như không có.
+      ACOS 50–110%. Click nhiều mà không ra đơn. Tắt ads thì hàng tồn, bật ads thì càng lỗ.
+    </p>
+    <p class="lead">
+      Bạn đã thử: tăng bid, giảm bid, tạo thêm campaign, xem thêm video, học thêm course.
+      Nhưng vấn đề vẫn y nguyên. Vì <strong style="color:var(--gray-dark)">bạn đang chữa triệu chứng, không phải gốc rễ.</strong>
+    </p>
+
+    <div class="root-causes">
+      <div class="cause-card">
+        <div class="num">01</div>
+        <h3>Không phân biệt được mục tiêu từng ASIN</h3>
+        <p>Chạy ads giống nhau cho tất cả — ASIN mua ranking và ASIN cần profit bị đối xử như nhau.</p>
+      </div>
+      <div class="cause-card">
+        <div class="num">02</div>
+        <h3>Listing chưa pass "Pre-Ads Gate"</h3>
+        <p>Đổ tiền ads vào trang chưa sẵn sàng convert — mọi campaign đều đốt tiền mà không ra đơn.</p>
+      </div>
+      <div class="cause-card">
+        <div class="num">03</div>
+        <h3>Không có hệ thống ra quyết định theo tuần</h3>
+        <p>Mọi thứ dựa vào cảm tính và firefighting liên tục — không có baseline, không có cadence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COST OF INACTION ──────────────────────────── -->
+<section class="section section-dark">
+  <div class="container">
+    <span class="tag" style="background:rgba(76,140,43,.25);border-color:rgba(168,208,141,.3);color:var(--green-light)">Nếu không fix</span>
+    <h2 class="text-white">Mỗi tháng trì hoãn, bạn đang mất gì?</h2>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="icon">💸</div>
+        <p><strong>$500–$2,000+/tháng</strong> tiếp tục chảy vào ads không hiệu quả. Tích lũy 3 tháng = $2,400–$6,000 mất trắng.</p>
+      </div>
+      <div class="cost-card">
+        <div class="icon">📉</div>
+        <p>Profit margin tiếp tục <strong>dưới 5%</strong> (hoặc âm) — doanh thu tăng nhưng lợi nhuận tỷ lệ nghịch.</p>
+      </div>
+      <div class="cost-card">
+        <div class="icon">🔁</div>
+        <p><strong>Càng scale càng lỗ</strong> — scale trên nền tảng chưa fix = phóng đại sai lầm.</p>
+      </div>
+      <div class="cost-card">
+        <div class="icon">⏱</div>
+        <p>Mất thêm <strong>6–12 tháng</strong> loay hoay thử sai trong khi đối thủ đã có hệ thống chạy trước.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOLUTION ──────────────────────────────────── -->
+<section class="section section-green">
+  <div class="container">
+    <span class="tag">Giải pháp</span>
+    <h2>GreenWay Profit Maximizer</h2>
+    <div class="solution-box">
+      <p>
+        Chương trình coaching <strong>5 tuần · hybrid</strong> giúp Amazon Sellers đang chảy máu lợi nhuận vì Ads
+        tạo ra <strong>ít nhất 1 thay đổi đo được (có số liệu trước/sau)</strong> — bằng cách xây hệ thống
+        ra quyết định Ads &amp; Listing theo data, không theo cảm tính.
+      </p>
+    </div>
+
+    <table class="overview-table">
+      <thead>
+        <tr><th>Thông tin</th><th>Chi tiết</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Đối tượng</td><td>Amazon Sellers doanh số $10K–$50K/tháng, đang chạy Ads nhưng profit mỏng hoặc âm</td></tr>
+        <tr><td>Hình thức</td><td><strong>Hybrid:</strong> Group coaching 2 buổi/tuần · 1:1 30 phút/team/tuần · Group chat 24h</td></tr>
+        <tr><td>Thời lượng</td><td><strong>5 tuần · 10 buổi</strong> (Buổi A: Training + giao bài · Buổi B: Review + hot seats)</td></tr>
+        <tr><td>Scope</td><td>Diagnose → Stop the Bleed → Fix Foundation → Scale Winner → Lock System</td></tr>
+        <tr><td>Cam kết</td><td>Ít nhất 1 thay đổi đo được + Before/After Report + Weekly Decision System</td></tr>
+        <tr><td>Coach</td><td><strong>Bùi Ngọc Bình</strong> — Founder ECom GreenWay, Amazon Seller 5+ năm, Amazon SPN</td></tr>
+        <tr><td>Quy mô</td><td>Tối đa <strong>5 team/cohort</strong> — đảm bảo chất lượng 1:1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── ROADMAP ────────────────────────────────────── -->
+<section class="section" id="roadmap">
+  <div class="container">
+    <span class="tag">Lộ trình</span>
+    <h2>5 tuần — FIX → CONTROL → PROFIT</h2>
+    <p class="lead">Mục tiêu duy nhất: từ "mất tiền mù" → "kiểm soát được, thấy kết quả thay đổi đầu tiên."</p>
+
+    <div class="roadmap">
+      <div class="week-card">
+        <div class="week-num"><div class="wn">Tuần</div><div class="wd">1</div></div>
+        <div class="week-body">
+          <h3>Diagnose — Profit X-Ray</h3>
+          <p>Chẩn đoán toàn account bằng Profit X-Ray Live · 3-Level Profit Leak (ASIN → Campaign → Keyword). Phân loại ASIN theo 3S Framework · pha vòng đời (Launch/Growth/Mature). Tag mục tiêu Ads (Ranking vs Profit).</p>
+          <div class="week-result">→ Baseline Snapshot + Profit Leak Hypothesis</div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-num"><div class="wn">Tuần</div><div class="wd">2</div></div>
+        <div class="week-body">
+          <h3>Stop the Bleed — Cắt lởm</h3>
+          <p>Đọc Search Term Report đúng cách + mindset cắt lởm. Tạo Negative Candidate List (Draft → Review → Execute) — cắt waste có kiểm soát ngay từ đầu.</p>
+          <div class="week-result">→ Negative Keywords execute + waste cắt được (số liệu trước/sau)</div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-num"><div class="wn">Tuần</div><div class="wd">3</div></div>
+        <div class="week-body">
+          <h3>Fix Foundation — CVR &amp; Keyword Gap</h3>
+          <p>CVR Health Check (5 đòn bẩy) · Pre-Ads Gate Checklist — sửa 1 đòn bẩy lớn nhất. PRODUCT Keyword Gap (7 tầng) · Bánh đà ASIN Rank.</p>
+          <div class="week-result">→ Foundation/Listing fix #1 đã execute</div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-num"><div class="wn">Tuần</div><div class="wd">4</div></div>
+        <div class="week-body">
+          <h3>Scale to Winner</h3>
+          <p>Pre-Scale Gate (5 tiêu chí) trước khi scale. Sweet-spot bid, 5 đòn bẩy scale, tỉ trọng spend, rollback triggers (bid ≤25%/lần, 7–14 ngày data). Viết Before/After Report với data thực.</p>
+          <div class="week-result">→ Scale Winner execute + Before/After Report</div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div class="week-num"><div class="wn">Tuần</div><div class="wd">5</div></div>
+        <div class="week-body">
+          <h3>Lock System + AI/Automation</h3>
+          <p>Framework APEX chuẩn hóa hệ thống. Weekly Review Rhythm (30 phút/tuần). Ứng dụng AI &amp; Automation để X3–X5 năng suất. Lập 90-Day Roadmap + present + graduation.</p>
+          <div class="week-result">→ Weekly Decision System + AI workflow + 90-Day Roadmap + Graduation</div>
+        </div>
+      </div>
+      <div class="bonus-week">
+        <span style="font-size:22px">➕</span>
+        <p><strong>+2 tuần bổ sung</strong> (nếu cần): Chỉ củng cố theo data mới, không thêm kiến thức — đảm bảo mọi học viên đều có kết quả đo được trước khi kết thúc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DELIVERABLES ───────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <span class="tag">Bạn nhận được gì</span>
+    <h2>Đầy đủ công cụ, hệ thống và kết quả</h2>
+    <p class="lead">Mọi thứ bạn cần để từ "firefighting" chuyển sang "hệ thống."</p>
+
+    <div class="deliverables-grid">
+      <div class="del-group">
+        <h3>Coaching &amp; Support</h3>
+        <div class="del-item"><div class="icon">✓</div><span><strong>10 buổi live group coaching</strong> (Buổi 1: 2–2.5h, còn lại 90 phút) — replay trong 24h</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>5 buổi 1:1 với coach</strong> (30 phút/tuần) — review quyết định trên account thật</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>Group chat support 24h</strong> trong suốt 5 tuần</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>Learning Pairs</strong> — 2 người review bài nhau, tăng accountability</span></div>
+      </div>
+      <div class="del-group">
+        <h3>Templates &amp; Công cụ</h3>
+        <div class="del-item"><div class="icon">✓</div><span>Profit X-Ray + Portfolio Audit Template (3-Level + 3S + Lifecycle)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span>Negative Candidate List (Draft → Review → Execute)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span>Pre-Ads Gate Checklist + CVR Health Check (5 đòn bẩy)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span>PRODUCT Keyword Gap Tracker (7 tầng) + Bánh đà ASIN Rank</span></div>
+        <div class="del-item"><div class="icon">✓</div><span>Scale Winner Draft List + Pre-Scale Gate (5 tiêu chí) + rollback triggers</span></div>
+        <div class="del-item"><div class="icon">✓</div><span>AI &amp; Automation Playbook — prompt/workflow X3–X5 năng suất (Framework APEX)</span></div>
+      </div>
+      <div class="del-group">
+        <h3>Kết quả mang về</h3>
+        <div class="del-item"><div class="icon">✓</div><span><strong>Baseline Snapshot</strong> — biết chính xác account đang ở đâu (Tuần 1)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>Before/After Report</strong> — bằng chứng thay đổi có số liệu (Tuần 4)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>AI &amp; Automation Workflow</strong> — tự động hóa review &amp; tối ưu (Tuần 5)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>90-Day Roadmap</strong> — biết chính xác bước tiếp theo (Tuần 5)</span></div>
+        <div class="del-item"><div class="icon">✓</div><span><strong>Weekly Decision System</strong> — duy trì kết quả sau khi kết thúc</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="tag">Học viên nói gì</span>
+    <h2>Kết quả thật — Số liệu thật</h2>
+    <p class="lead">Đây không phải kết quả "đặc biệt". Đây là kết quả khi đúng hệ thống, đúng người, đúng thời điểm.</p>
+
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-header">
+          <div class="testi-metrics">
+            <div class="metric-row">
+              <div class="metric-val">+70%</div>
+              <div class="metric-lbl">Lợi nhuận</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-val" style="font-size:16px">-6%</div>
+              <div class="metric-lbl">Ad Spend</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-val" style="font-size:16px">-3%</div>
+              <div class="metric-lbl">TACOS</div>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:var(--font-data)">sau ~1 tháng · doanh thu giữ nguyên</div>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"Trước đây tụi em điều chỉnh một cách cảm tính, bây giờ điều chỉnh có mục tiêu hơn — nhìn từng nhóm sản phẩm là biết nên tiếp tục hay dừng đổ tiền vào đâu."</p>
+          <div class="testi-author">Mai — vận hành Team Mr. Hoàn</div>
+          <div class="testi-role">Amazon FBA Seller · Doanh thu $10K+/tháng · Từng lãi dưới 5%</div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-header">
+          <div class="testi-metrics">
+            <div class="metric-row">
+              <div class="metric-val">+46%</div>
+              <div class="metric-lbl">Net Profit</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-val" style="font-size:16px">+21%</div>
+              <div class="metric-lbl">Revenue</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-val" style="font-size:16px">~20%</div>
+              <div class="metric-lbl">Net Margin (từ 7–10%)</div>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:var(--font-data)">sau ~1 tháng</div>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
+          <div class="testi-author">Tạ Trung Tuyến</div>
+          <div class="testi-role">Amazon Seller ~2 năm · Net margin từ 7–10% lên ~20%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 5 MISTAKES ────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <span class="tag">Cách tiếp cận</span>
+    <h2>5 vấn đề bạn đang gặp — và Profit Maximizer fix như thế nào</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Bạn đang nghĩ...</th>
+          <th>Sự thật</th>
+          <th>Profit Maximizer dạy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Doanh số tăng = đang ổn"</td>
+          <td>Doanh số tăng mà profit giảm = càng bán càng lỗ</td>
+          <td class="yes-cell" style="text-align:left">Profit-First System: audit 3 tầng + phân loại 3S</td>
+        </tr>
+        <tr>
+          <td>"Dashboard tệ thì tắt, ổn thì tăng"</td>
+          <td>Không có cadence = không có kiểm soát</td>
+          <td class="yes-cell" style="text-align:left">Weekly Decision Log + Review Rhythm (30 phút/tuần)</td>
+        </tr>
+        <tr>
+          <td>"ACOS cao thì negative thôi"</td>
+          <td>Negative theo cảm giác = cắt luôn cơ hội</td>
+          <td class="yes-cell" style="text-align:left">Negative Candidate List (Draft → Review → Execute)</td>
+        </tr>
+        <tr>
+          <td>"Ads không hiệu quả → đổi chiến lược Ads"</td>
+          <td>Foundation yếu thì Ads nào cũng đốt tiền</td>
+          <td class="yes-cell" style="text-align:left">Pre-Ads Gate Checklist + Keyword Gap — sửa đòn bẩy lớn nhất trước</td>
+        </tr>
+        <tr>
+          <td>"Keyword win → tăng budget ngay"</td>
+          <td>Chưa stop bleed thì chưa được scale</td>
+          <td class="yes-cell" style="text-align:left">Scale Winner Draft List + bid/budget rules (≤25%/lần, 7–14 ngày data)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── FIT ───────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="tag">Dành cho ai</span>
+    <h2>Chương trình này phù hợp với bạn không?</h2>
+    <div class="fit-grid">
+      <div class="fit-box yes">
+        <h3>Phù hợp nếu bạn...</h3>
+        <div class="fit-item"><div class="dot">✓</div><span>Doanh số <strong>$10K–$50K/tháng</strong> — đã có sản phẩm đang bán, biết listing/ads cơ bản</span></div>
+        <div class="fit-item"><div class="dot">✓</div><span>Sản phẩm đã bán <strong>60+ ngày</strong> — có đủ data để diagnose</span></div>
+        <div class="fit-item"><div class="dot">✓</div><span>Profit margin mỏng <strong>(dưới ~10%) hoặc đang lỗ</strong> — biết mình có vấn đề</span></div>
+        <div class="fit-item"><div class="dot">✓</div><span>ACOS 50%+ mà không biết tại sao</span></div>
+        <div class="fit-item"><div class="dot">✓</div><span>Có team (ít nhất 1 người) có thể làm bài và nộp snapshot hàng tuần</span></div>
+        <div class="fit-item"><div class="dot">✓</div><span>Sẵn sàng làm theo checklist và bị "đòi bài"</span></div>
+      </div>
+      <div class="fit-box no">
+        <h3>Không phù hợp nếu bạn...</h3>
+        <div class="fit-item"><div class="dot">✗</div><span>New seller chưa có data — chưa bán 60 ngày, chưa đủ số liệu</span></div>
+        <div class="fit-item"><div class="dot">✗</div><span>Muốn "đi tắt" bằng thủ thuật PPC — PM xây hệ thống, không dạy hack</span></div>
+        <div class="fit-item"><div class="dot">✗</div><span>Không thể commit nhịp 5 tuần — yêu cầu nộp bài + tham gia review hàng tuần</span></div>
+        <div class="fit-item"><div class="dot">✗</div><span>Doanh số dưới $10K/tháng — chưa đủ volume để có kết quả có ý nghĩa</span></div>
+        <div class="fit-item"><div class="dot">✗</div><span>Đang tìm người "chạy ads hộ" — đây là coaching (dạy câu cá), không phải agency</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COHORT MODEL ───────────────────────────────── -->
+<section class="section section-green">
+  <div class="container text-center">
+    <span class="tag">Cohort Model</span>
+    <h2>Số lượng có hạn — Chất lượng không giảm</h2>
+    <p class="lead" style="max-width:560px;margin:0 auto 28px">
+      Chương trình mở theo <strong>đợt (cohort)</strong>, mỗi đợt tối đa <strong>5 team</strong>.
+      Ngày bắt đầu cố định — đóng đăng ký khi đủ số hoặc trước 1 tuần.
+    </p>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 32px;display:inline-block;text-align:left;box-shadow:var(--shadow)">
+      <p style="margin:0 0 6px;color:var(--gray-dark)">⏱ Mỗi tuần trì hoãn =</p>
+      <p style="font-family:var(--font-data);font-size:22px;color:var(--green-dark);font-weight:600;margin:0">+$500–$2,000 chi phí ads lãng phí</p>
+    </div>
+    <div style="margin-top:28px">
+      <a href="#register" class="btn btn-primary btn-lg">Giữ slot cohort tiếp theo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COACH ──────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="tag">Về Coach</span>
+    <h2>Người đã fix chính business của mình trước</h2>
+
+    <div class="coach-layout">
+      <div>
+        <div class="coach-avatar">
+          <img src="assets/coach.jpg" alt="Bùi Ngọc Bình" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+        </div>
+      </div>
+      <div>
+        <div class="coach-name">Bùi Ngọc Bình</div>
+        <div class="coach-title">Founder ECom GreenWay &amp; Pukido · Amazon Seller 5+ năm</div>
+        <div class="badges">
+          <div class="badge">Amazon SPN</div>
+          <div class="badge">The Rising Voice 2025</div>
+          <div class="badge">5+ năm thực chiến</div>
+        </div>
+        <p style="font-size:15px">Đã đồng hành cùng nhiều doanh nghiệp Việt Nam từ zero đến profitable trên Amazon.</p>
+        <div class="coach-story">
+          <p>
+            Nửa đầu 2025, doanh số tăng hơn 30% — nhưng lợi nhuận giảm sâu 70%. Đúng là vấn đề nhiều seller đang gặp: <em>doanh số tăng ≠ lợi nhuận tăng</em>.
+            <br><br>
+            Nửa cuối 2025, rà soát toàn bộ: áp dụng Profit-First Thinking, tái cấu trúc Ads theo mục tiêu (ranking vs profit), siết vận hành theo data tuần.
+            Kết quả: profit phục hồi và cải thiện liên tục từ Q4/2025 đến nay.
+            <br><br>
+            <strong style="color:var(--gray-dark)">Những gì dạy trong Profit Maximizer là hệ thống đã dùng để fix chính business của mình.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <span class="tag">FAQ</span>
+    <h2>Câu hỏi thường gặp</h2>
+
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Đã học nhiều thầy rồi, sao cái này khác?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          Khác ở chỗ: không dạy lý thuyết mới — mà xây <strong>hệ thống ra quyết định</strong> trên chính data của bạn. Bạn nộp bài, coach review account thật, không phải case chung chung. Và mỗi tuần bạn phải nộp snapshot — nên kết quả đến từ hành động, không phải kiến thức.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Bận không live được thì sao?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          Có replay + recap trong 24h. Nhưng cần commit nộp Weekly Snapshot hàng tuần — đó mới là thứ tạo kết quả. Buổi 1:1 linh hoạt thời gian với coach.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Sợ lộ số liệu account?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          Buổi 1:1 chỉ có bạn và coach. Group dùng số liệu tổng quan hoặc ẩn danh. Bạn kiểm soát hoàn toàn mức độ chia sẻ.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Liệu có đủ thời gian thực hiện không?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          Commitment khoảng <strong>3–4 giờ/tuần</strong>: 2 buổi live (3h) + nộp snapshot (30 phút) + 1:1 (30 phút). Nếu bạn đang dành 5–10 giờ/tuần firefighting ads → chương trình này thực ra <em>tiết kiệm thời gian</em> cho bạn.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          5 tuần có đủ để thấy kết quả không?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          5 tuần đủ để tạo <strong>thay đổi đo được đầu tiên</strong> và xây hệ thống ra quyết định theo tuần. Nếu cần, có thêm 2 tuần bổ sung. Sau Profit Maximizer, bước tiếp là Profit System hoặc Profit Scale — tùy năng lực và cam kết.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── JOURNEY MAP ───────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="tag">Hành trình EGW</span>
+    <h2>Profit Maximizer nằm ở đâu trong lộ trình của bạn?</h2>
+    <p>Chương trình này là bước 3 trong hệ thống đào tạo GreenWay — dành cho seller đã có sản phẩm và cần kiểm soát lợi nhuận.</p>
+
+    <div class="journey">
+      <h3>Hành trình Scaling Seller trên GreenWay</h3>
+      <div class="journey-steps">
+        <div class="j-step" style="opacity:.5">
+          <div class="step-num">STEP 1</div>
+          <div class="step-name">GreenWay Product Research Lab</div>
+          <div class="step-desc">New Seller · Group · 4 tuần</div>
+        </div>
+        <div class="j-step" style="opacity:.5">
+          <div class="step-num">STEP 2</div>
+          <div class="step-name">GreenWay Launch Mentorship</div>
+          <div class="step-desc">1:1 · 4–5 tháng</div>
+        </div>
+        <div class="j-step active">
+          <div class="step-num">STEP 3</div>
+          <div class="step-name">
+            GreenWay Profit Maximizer
+            <span class="you-are-here">Bạn đang ở đây</span>
+          </div>
+          <div class="step-desc">Hybrid · 5 tuần</div>
+        </div>
+        <div class="j-step" style="opacity:.5">
+          <div class="step-num">STEP 4</div>
+          <div class="step-name">GreenWay Profit System</div>
+          <div class="step-desc">Hệ thống profitable toàn diện</div>
+        </div>
+        <div class="j-step" style="opacity:.5">
+          <div class="step-num">STEP 5</div>
+          <div class="step-name">GreenWay Profit Scale</div>
+          <div class="step-desc">Scale có kiểm soát</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────── -->
+<section class="cta-section" id="register">
+  <div class="container">
+    <div class="cohort-badge">⚡ Cohort model · Tối đa 5 team · Đóng khi đủ số</div>
+    <h2>Sẵn sàng ngừng chảy máu?</h2>
+    <p class="sub">
+      Điền form đăng ký — Bình sẽ liên hệ phỏng vấn 1:1 để xác nhận bạn có phù hợp không.
+      Hoàn toàn miễn phí, không cam kết.
+    </p>
+    <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1" target="_blank" class="btn btn-gold btn-lg">
+      Đăng ký tư vấn 1:1 →
+    </a>
+
+    <div class="cta-contact">
+      <div class="contact-item">
+        <div>
+          <div class="label">Hotline / Zalo</div>
+          <a href="tel:0906101166">0906 101 166</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="label">Email</div>
+          <a href="mailto:ngocbinhls@gmail.com">ngocbinhls@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="label">Đặt lịch 1:1</div>
+          <a href="https://cal.com/buingocbinh/60min" target="_blank">cal.com/buingocbinh/60min</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="label">Website</div>
+          <a href="https://ecomgreenway.com" target="_blank">ecomgreenway.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────── -->
+<footer class="footer">
+  <p>© 2025–2026 <span>ECom GreenWay Academy</span> · "Building Sustainable Amazon Businesses" · Connect · Grow · Sustain</p>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta">
+  <a href="#register">Đăng ký tư vấn miễn phí →</a>
+</div>
+
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+</script>
+</body>
+</html>
