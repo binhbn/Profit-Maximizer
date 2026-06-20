@@ -123,7 +123,7 @@
       align-items: center;
     }
     .nav-logo {
-      height: 52px;
+      height: 68px;
       width: auto;
       display: block;
     }
@@ -189,7 +189,7 @@
       font-family: var(--font-data);
       font-size: 24px;
       font-weight: 600;
-      color: var(--gold);
+      color: var(--white);
     }
     .stat-item .lbl {
       font-size: 12px;
@@ -504,6 +504,14 @@
       overflow: hidden;
       flex-shrink: 0;
     }
+    .coach-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    @media (max-width: 768px) {
+      .coach-avatar img { object-position: center 45%; }
+    }
     .coach-name { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
     .coach-title { font-size: 14px; color: var(--green); font-weight: 600; margin-bottom: 20px; }
     .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -735,6 +743,62 @@
       color: var(--white);
     }
     @media (max-width: 640px) { .sticky-cta { display: flex; } }
+
+    /* ─── HERO GRID ─────────────────────────────────── */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 900px) { .hero-visual { display: none; } }
+
+    /* ─── LIGHTBOX ──────────────────────────────────── */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-inner { position: relative; width: 100%; max-width: 900px; }
+    .lb-close {
+      position: fixed;
+      top: 16px; right: 20px;
+      background: none; border: none;
+      color: white; font-size: 42px;
+      cursor: pointer; line-height: 1; z-index: 600;
+      opacity: .7;
+    }
+    .lb-close:hover { opacity: 1; }
+    .lb-video { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 8px; overflow: hidden; }
+    .lb-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .lb-img-wrap { display: flex; align-items: center; justify-content: center; max-height: 90vh; }
+    .lb-img-wrap img { max-height: 90vh; max-width: 100%; object-fit: contain; border-radius: 8px; }
+
+    /* ─── YOUTUBE THUMBNAIL ─────────────────────────── */
+    .yt-thumb { position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; background: #000; margin-top: 16px; }
+    .yt-thumb img { width: 100%; display: block; opacity: .85; transition: opacity .2s; }
+    .yt-thumb:hover img { opacity: 1; }
+    .yt-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .yt-play-btn {
+      width: 58px; height: 58px;
+      background: rgba(200,0,0,.92);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s, background .15s;
+      box-shadow: 0 2px 12px rgba(0,0,0,.5);
+    }
+    .yt-thumb:hover .yt-play-btn { transform: scale(1.1); background: rgb(200,0,0); }
+
+    /* ─── LIGHTBOX EXPAND HINT ──────────────────────── */
+    .expandable { cursor: zoom-in; transition: opacity .2s; }
+    .expandable:hover { opacity: .9; }
   </style>
 </head>
 <body>
@@ -752,21 +816,71 @@
 <!-- ─── HERO ─────────────────────────────────────── -->
 <section class="hero">
   <div class="container">
-    <p class="eyebrow">ECom GreenWay Academy · Profit Maximizer Cohort</p>
-    <h1>
-      Doanh số tăng.<br>
-      Lợi nhuận <em>biến mất</em>.<br>
-      5 tuần để fix điều đó.
-    </h1>
-    <p class="subtitle">
-      Chương trình coaching giúp Amazon Sellers $10K–$50K/tháng ngừng chảy máu lợi nhuận
-      bằng hệ thống ra quyết định Ads &amp; Listing theo data — không theo cảm tính.
-    </p>
-    <div class="hero-cta-group">
-      <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">Đăng ký tư vấn ngay →</a>
-      <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="eyebrow">ECom GreenWay Academy · Profit Maximizer Cohort</p>
+        <h1>
+          Doanh số tăng.<br>
+          Lợi nhuận <em>biến mất</em>.<br>
+          5 tuần để fix điều đó.
+        </h1>
+        <p class="subtitle">
+          Chương trình coaching giúp Amazon Sellers $10K–$50K/tháng ngừng chảy máu lợi nhuận
+          bằng hệ thống ra quyết định Ads &amp; Listing theo data — không theo cảm tính.
+        </p>
+        <div class="hero-cta-group">
+          <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">Đăng ký tư vấn ngay →</a>
+          <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
+        </div>
+        <p class="hero-note">Mỗi cohort tối đa 5 team · Mở đăng ký theo đợt</p>
+      </div>
+      <div class="hero-visual">
+        <svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px;filter:drop-shadow(0 4px 28px rgba(0,0,0,.35))" aria-hidden="true">
+          <!-- Card -->
+          <rect x="0" y="0" width="430" height="260" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(168,208,141,.2)" stroke-width="1"/>
+          <!-- Top label -->
+          <text x="20" y="28" font-family="Montserrat,sans-serif" font-size="9.5" font-weight="700" letter-spacing="1.8" fill="rgba(168,208,141,.5)">VẤN ĐỀ PHỔ BIẾN</text>
+          <!-- Legend -->
+          <line x1="194" y1="23" x2="212" y2="23" stroke="#A8D08D" stroke-width="2" stroke-linecap="round"/>
+          <text x="216" y="27" font-family="Inter,sans-serif" font-size="10" fill="rgba(168,208,141,.85)">Doanh số</text>
+          <line x1="295" y1="23" x2="313" y2="23" stroke="#E0B95A" stroke-width="2" stroke-dasharray="4 2.5" stroke-linecap="round"/>
+          <text x="317" y="27" font-family="Inter,sans-serif" font-size="10" fill="rgba(224,185,90,.85)">Lợi nhuận</text>
+          <!-- Grid lines -->
+          <line x1="40" y1="60" x2="360" y2="60" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+          <line x1="40" y1="100" x2="360" y2="100" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+          <line x1="40" y1="140" x2="360" y2="140" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+          <line x1="40" y1="185" x2="360" y2="185" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+          <!-- Revenue fill -->
+          <polygon points="50,168 130,148 215,122 300,92 360,68 360,185 50,185" fill="rgba(168,208,141,.08)"/>
+          <!-- Revenue line -->
+          <polyline points="50,168 130,148 215,122 300,92 360,68" fill="none" stroke="#A8D08D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Profit fill -->
+          <polygon points="50,168 130,175 215,184 300,194 360,202 360,185 50,185" fill="rgba(224,185,90,.06)"/>
+          <!-- Profit line (dashed) -->
+          <polyline points="50,168 130,175 215,184 300,194 360,202" fill="none" stroke="#E0B95A" stroke-width="2" stroke-dasharray="6 3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Start dot -->
+          <circle cx="50" cy="168" r="4" fill="#A8D08D"/>
+          <!-- End dots -->
+          <circle cx="360" cy="68" r="5" fill="#A8D08D"/>
+          <circle cx="360" cy="202" r="5" fill="#E0B95A"/>
+          <!-- Revenue annotation -->
+          <text x="369" y="64" font-family="Roboto Mono,monospace" font-size="13" font-weight="600" fill="#A8D08D">+30%</text>
+          <text x="369" y="78" font-family="Inter,sans-serif" font-size="9" fill="rgba(168,208,141,.65)">doanh số</text>
+          <!-- Profit annotation -->
+          <text x="369" y="198" font-family="Roboto Mono,monospace" font-size="13" font-weight="600" fill="#E0B95A">-70%</text>
+          <text x="369" y="212" font-family="Inter,sans-serif" font-size="9" fill="rgba(224,185,90,.65)">lợi nhuận</text>
+          <!-- X axis -->
+          <line x1="30" y1="210" x2="370" y2="210" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          <text x="50"  y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T1</text>
+          <text x="130" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T2</text>
+          <text x="215" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T3</text>
+          <text x="300" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T4</text>
+          <text x="360" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T5</text>
+          <!-- Caption -->
+          <text x="215" y="248" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="rgba(255,255,255,.32)">H1/2025 — kịch bản đang xảy ra với nhiều seller</text>
+        </svg>
+      </div>
     </div>
-    <p class="hero-note">Mỗi cohort tối đa 5 team · Mở đăng ký theo đợt</p>
   </div>
 </section>
 
@@ -1004,11 +1118,13 @@
           <p class="testi-quote">"Trước đây tụi em điều chỉnh một cách cảm tính, bây giờ điều chỉnh có mục tiêu hơn — nhìn từng nhóm sản phẩm là biết nên tiếp tục hay dừng đổ tiền vào đâu."</p>
           <div class="testi-author">Mai — vận hành Team Mr. Hoàn</div>
           <div class="testi-role">Amazon FBA Seller · Doanh thu $10K+/tháng · Từng lãi dưới 5%</div>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;margin-top:16px;background:#000">
-            <iframe src="https://www.youtube.com/embed/W5BztD5Zl5s"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen loading="lazy" title="Video testimonial — Team Mr. Hoàn"></iframe>
+          <div class="yt-thumb" onclick="openLBVideo('W5BztD5Zl5s')">
+            <img src="https://img.youtube.com/vi/W5BztD5Zl5s/hqdefault.jpg" alt="Video testimonial Team Mr. Hoàn" loading="lazy">
+            <div class="yt-play">
+              <div class="yt-play-btn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1035,7 +1151,7 @@
           <p class="testi-quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
           <div class="testi-author">Tạ Trung Tuyến</div>
           <div class="testi-role">Amazon Seller ~2 năm · Net margin từ 10–12% lên ~20%</div>
-          <img src="assets/tuyen-result-pm1.jpg" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
+          <img src="assets/tuyen-result-pm1.jpg" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.jpg','Kết quả Team Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
         </div>
       </div>
     </div>
@@ -1143,7 +1259,7 @@
     <div class="coach-layout">
       <div>
         <div class="coach-avatar">
-          <img src="assets/binhbn avatar 3.jpg" alt="Bùi Ngọc Bình" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          <img src="assets/binhbn avatar 3.jpg" alt="Bùi Ngọc Bình" loading="lazy" />
         </div>
       </div>
       <div>
@@ -1354,6 +1470,12 @@
   <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đăng ký tư vấn miễn phí →</a>
 </div>
 
+<!-- ─── LIGHTBOX ──────────────────────────────────── -->
+<div id="lightbox" class="lb-overlay" onclick="closeLBOverlay(event)">
+  <button class="lb-close" onclick="closeLB()">×</button>
+  <div class="lb-inner" id="lb-content"></div>
+</div>
+
 <script>
   function toggleFaq(btn) {
     const answer = btn.nextElementSibling;
@@ -1365,6 +1487,34 @@
       btn.classList.add('open');
     }
   }
+
+  function openLBVideo(id) {
+    document.getElementById('lb-content').innerHTML =
+      '<div class="lb-video"><iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openLBImg(src, alt) {
+    document.getElementById('lb-content').innerHTML =
+      '<div class="lb-img-wrap"><img src="' + src + '" alt="' + (alt || '') + '"></div>';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLB() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lb-content').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function closeLBOverlay(e) {
+    if (e.target === document.getElementById('lightbox')) closeLB();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLB();
+  });
 </script>
 </body>
 </html>
