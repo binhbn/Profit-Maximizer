@@ -791,6 +791,41 @@
     /* ─── LIGHTBOX EXPAND HINT ──────────────────────── */
     .expandable { cursor: zoom-in; transition: opacity .2s; }
     .expandable:hover { opacity: .9; }
+
+    /* ─── HERO CONVERSION ELEMENTS ──────────────────── */
+    .hero-outcome {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green-light);
+      margin: 0 0 14px;
+    }
+    .hero-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(168,208,141,.12);
+      border: 1px solid rgba(168,208,141,.25);
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 20px;
+    }
+    .hero-proof .proof-stat {
+      font-family: var(--font-data);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-light);
+      white-space: nowrap;
+    }
+    .hero-proof .proof-detail {
+      font-size: 13px;
+      color: rgba(255,255,255,.55);
+    }
+    .hero-process {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      margin: 10px 0 0;
+    }
   </style>
 </head>
 <body>
@@ -816,15 +851,20 @@
           Lợi nhuận <em>biến mất</em>.<br>
           5 tuần để fix điều đó.
         </h1>
+        <p class="hero-outcome">Không cần tăng doanh số — không cần đốt thêm tiền ads.</p>
+        <div class="hero-proof">
+          <span class="proof-stat">+70% lợi nhuận</span>
+          <span class="proof-detail">Team Hoàn · giảm 6% ad spend · doanh thu giữ nguyên</span>
+        </div>
         <p class="subtitle">
-          Chương trình coaching giúp Amazon Sellers $10K–$50K/tháng ngừng chảy máu lợi nhuận
-          bằng hệ thống ra quyết định Ads &amp; Listing theo data — không theo cảm tính.
+          Coaching 5 tuần cho Amazon Sellers $10K–$50K/tháng — xây hệ thống ra quyết định Ads &amp; Listing theo data, không theo cảm tính.
         </p>
         <div class="hero-cta-group">
-          <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">Đăng ký tư vấn ngay →</a>
+          <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">Đăng ký tư vấn 1:1 ngay →</a>
           <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
         </div>
-        <p class="hero-note">Mỗi cohort tối đa 5 team · Mở đăng ký theo đợt</p>
+        <p class="hero-process">Điền form 2 phút · phỏng vấn 1:1 miễn phí · xác nhận phù hợp trước khi tham gia</p>
+        <p class="hero-note">Cohort tiếp theo: dự kiến 11/09/2026 · Tối đa 5 team</p>
       </div>
       <div class="hero-visual">
         <svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px;filter:drop-shadow(0 4px 28px rgba(0,0,0,.35))" aria-hidden="true">
@@ -940,7 +980,7 @@
     <div class="cost-grid">
       <div class="cost-card">
         <div class="icon">💸</div>
-        <p><strong>$500–$2,000+/tháng</strong> tiếp tục chảy vào ads không hiệu quả. Tích lũy 3 tháng = $2,400–$6,000 mất trắng.</p>
+        <p><strong>$500–$2,000+/tháng</strong> tiếp tục chảy vào ads không hiệu quả. Tích lũy 3 tháng = $1,500–$6,000 mất trắng.</p>
       </div>
       <div class="cost-card">
         <div class="icon">📉</div>
@@ -1223,27 +1263,8 @@
   </div>
 </section>
 
-<!-- ─── COHORT MODEL ───────────────────────────────── -->
-<section class="section section-green">
-  <div class="container text-center">
-    <span class="tag">Cohort Model</span>
-    <h2>Số lượng có hạn — Chất lượng không giảm</h2>
-    <p class="lead" style="max-width:560px;margin:0 auto 28px">
-      Chương trình mở theo <strong>đợt (cohort)</strong>, mỗi đợt tối đa <strong>5 team</strong>.
-      Ngày bắt đầu cố định — đóng đăng ký khi đủ số hoặc trước 1 tuần.
-    </p>
-    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 32px;display:inline-block;text-align:left;box-shadow:var(--shadow)">
-      <p style="margin:0 0 6px;color:var(--gray-dark)">⏱ Mỗi tuần trì hoãn =</p>
-      <p style="font-family:var(--font-data);font-size:22px;color:var(--green-dark);font-weight:600;margin:0">+$500–$2,000 chi phí ads lãng phí</p>
-    </div>
-    <div style="margin-top:28px">
-      <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-primary btn-lg">Giữ slot cohort tiếp theo →</a>
-    </div>
-  </div>
-</section>
-
 <!-- ─── COACH ──────────────────────────────────────── -->
-<section class="section">
+<section class="section section-alt">
   <div class="container">
     <span class="tag">Về Coach</span>
     <h2>Người đã fix chính business của mình trước</h2>
@@ -1262,7 +1283,7 @@
           <div class="badge">The Rising Voice 2025</div>
           <div class="badge">5+ năm thực chiến</div>
         </div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:20px;padding:16px 20px;background:var(--green-bg);border-radius:var(--radius);border:1px solid var(--border)">
+        <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:20px;padding:16px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--border)">
           <div>
             <div style="font-family:var(--font-data);font-size:24px;font-weight:600;color:var(--green)">+130%</div>
             <div style="font-size:12px;color:var(--gray)">Net Profit MTD T3/2026</div>
@@ -1290,6 +1311,26 @@
           </p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COHORT MODEL ───────────────────────────────── -->
+<section class="section section-green">
+  <div class="container text-center">
+    <span class="tag">Cohort Model</span>
+    <h2>Số lượng có hạn — Chất lượng không giảm</h2>
+    <p class="lead" style="max-width:560px;margin:0 auto 28px">
+      Chương trình mở theo <strong>đợt (cohort)</strong>, mỗi đợt tối đa <strong>5 team</strong>.
+      Ngày bắt đầu cố định — đóng đăng ký khi đủ số hoặc trước 1 tuần.
+    </p>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 32px;display:inline-block;text-align:center;box-shadow:var(--shadow)">
+      <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Cohort tiếp theo</div>
+      <div style="font-family:var(--font-data);font-size:26px;font-weight:600;color:var(--green-dark)">11/09/2026</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:6px">Đang nhận hồ sơ · Đóng khi đủ 5 team</div>
+    </div>
+    <div style="margin-top:28px">
+      <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-primary btn-lg">Đăng ký tư vấn 1:1 →</a>
     </div>
   </div>
 </section>
@@ -1396,11 +1437,11 @@
 <!-- ─── CTA ───────────────────────────────────────── -->
 <section class="cta-section" id="register">
   <div class="container">
-    <div class="cohort-badge">⚡ Cohort model · Tối đa 5 team · Đóng khi đủ số</div>
+    <div class="cohort-badge">⚡ Cohort tiếp theo: 11/09/2026 · Tối đa 5 team</div>
     <h2>Sẵn sàng ngừng chảy máu?</h2>
     <p class="sub">
-      Điền form đăng ký — Bình sẽ liên hệ phỏng vấn 1:1 để xác nhận bạn có phù hợp không.
-      Hoàn toàn miễn phí, không cam kết.
+      Điền form 2 phút — Bình sẽ liên hệ phỏng vấn 1:1 để xác nhận phù hợp.
+      Buổi phỏng vấn hoàn toàn miễn phí, không ràng buộc.
     </p>
     <div style="display:inline-flex;gap:0;background:rgba(255,255,255,.07);border:1px solid rgba(201,162,77,.35);border-radius:var(--radius);padding:16px 28px;margin-bottom:28px;flex-wrap:wrap;justify-content:center;gap:20px;align-items:center">
       <div style="text-align:center">
@@ -1418,7 +1459,10 @@
         <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px">chi phí của sự trì hoãn</div>
       </div>
     </div>
-    <br>
+    <div style="max-width:520px;margin:24px auto 28px;background:rgba(168,208,141,.1);border:1px solid rgba(168,208,141,.25);border-radius:var(--radius);padding:18px 24px;text-align:left">
+      <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-light);margin-bottom:8px">Cam kết kết quả</div>
+      <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;line-height:1.65">Sau 5 tuần, nếu chưa có ít nhất 1 thay đổi đo được có số liệu trước/sau — chúng tôi đồng hành thêm <strong style="color:var(--green-light)">2 tuần miễn phí</strong> đến khi bạn có kết quả thật.</p>
+    </div>
     <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">
       Đăng ký tư vấn 1:1 →
     </a>
@@ -1459,7 +1503,7 @@
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta">
-  <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đăng ký tư vấn miễn phí →</a>
+  <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đăng ký tư vấn 1:1 →</a>
 </div>
 
 <!-- ─── LIGHTBOX ──────────────────────────────────── -->
