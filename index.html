@@ -887,9 +887,21 @@
       min-height: 560px;
     }
     @media (max-width: 480px) {
-      .apply-modal { max-height: 95vh; border-radius: 10px 10px 0 0; }
       .apply-modal-overlay { align-items: flex-end; padding: 0; }
-      .apply-modal iframe { min-height: 480px; }
+      .apply-modal {
+        height: 92vh;          /* fallback cho browser cũ */
+        height: 92dvh;         /* iOS Safari: trừ thanh địa chỉ động */
+        max-height: 92dvh;
+        border-radius: 10px 10px 0 0;
+      }
+      /* Parent có height xác định (92dvh) → flex:1 + min-height:0
+         cho iframe lấp phần còn lại, kể cả khi header wrap 2 dòng.
+         Đây là cách iOS Safari render iframe đúng (cha phải có height xác định). */
+      .apply-modal iframe {
+        flex: 1 1 0;
+        min-height: 0;
+        -webkit-overflow-scrolling: touch;
+      }
     }
   </style>
 </head>
@@ -1644,7 +1656,10 @@
   <div class="apply-modal">
     <div class="apply-modal-header">
       <span>Hồ sơ ứng tuyển · Profit Maximizer Cohort</span>
-      <button class="apply-modal-close" onclick="closeApplyModal()" aria-label="Đóng">×</button>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" rel="noopener" style="font-size:12px;color:var(--green);font-weight:600;white-space:nowrap">Mở tab mới ↗</a>
+        <button class="apply-modal-close" onclick="closeApplyModal()" aria-label="Đóng">×</button>
+      </div>
     </div>
     <iframe
       id="apply-iframe"
