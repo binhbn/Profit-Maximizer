@@ -1677,7 +1677,22 @@
 </div>
 
 <script>
+  // Link form đầy đủ (dùng cho mobile mở tab mới — KHÔNG nhúng iframe Notion
+  // nặng trên điện thoại vì gây iOS Safari hết bộ nhớ → crash trang).
+  var APPLY_FORM_URL = "https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105";
+
+  function isMobileDevice() {
+    return window.matchMedia('(max-width: 768px)').matches
+        || window.matchMedia('(pointer: coarse)').matches;
+  }
+
   function openApplyModal() {
+    // Mobile: mở thẳng form ở tab mới — nhẹ, không crash. Gọi đồng bộ trong
+    // user-gesture nên iOS không chặn popup.
+    if (isMobileDevice()) {
+      window.open(APPLY_FORM_URL, '_blank', 'noopener');
+      return;
+    }
     const modal = document.getElementById('apply-modal');
     const iframe = document.getElementById('apply-iframe');
     if (!iframe.getAttribute('src')) iframe.src = iframe.dataset.src;
@@ -1685,8 +1700,12 @@
     document.body.style.overflow = 'hidden';
   }
   function closeApplyModal() {
-    document.getElementById('apply-modal').classList.remove('open');
+    const modal = document.getElementById('apply-modal');
+    const iframe = document.getElementById('apply-iframe');
+    modal.classList.remove('open');
     document.body.style.overflow = '';
+    // Giải phóng iframe Notion khỏi bộ nhớ khi đóng (tránh tích lũy khi mở lại).
+    if (iframe) iframe.removeAttribute('src');
   }
   function closeApplyModalOverlay(e) {
     if (e.target === document.getElementById('apply-modal')) closeApplyModal();
