@@ -834,6 +834,63 @@
       color: rgba(255,255,255,.72);
       margin: 10px 0 0;
     }
+
+    /* ─── APPLY MODAL ───────────────────────────────── */
+    .apply-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 700;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .apply-modal-overlay.open { display: flex; }
+    .apply-modal {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,.35);
+      display: flex;
+      flex-direction: column;
+    }
+    .apply-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .apply-modal-header span {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .apply-modal-close {
+      background: none; border: none;
+      font-size: 26px; line-height: 1;
+      color: var(--gray); cursor: pointer;
+      padding: 0 4px;
+    }
+    .apply-modal-close:hover { color: var(--gray-dark); }
+    .apply-modal iframe {
+      width: 100%;
+      flex: 1;
+      border: 0;
+      min-height: 560px;
+    }
+    @media (max-width: 480px) {
+      .apply-modal { max-height: 95vh; border-radius: 10px 10px 0 0; }
+      .apply-modal-overlay { align-items: flex-end; padding: 0; }
+      .apply-modal iframe { min-height: 480px; }
+    }
   </style>
 </head>
 <body>
@@ -846,7 +903,7 @@
         <img src="assets/Ecom Greenway Logo.png" alt="ECom GreenWay" class="nav-logo" />
       </a>
     </div>
-    <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-primary nav-cta">Đăng ký tư vấn</a>
+    <button onclick="openApplyModal()" class="btn btn-primary nav-cta">Đăng ký tư vấn</button>
   </div>
 </nav>
 
@@ -871,16 +928,17 @@
           Coaching 5 tuần cho Amazon Sellers $10K–$50K/tháng — xây hệ thống ra quyết định Ads &amp; Listing theo data, không theo cảm tính.
         </p>
         <div class="hero-cta-group">
-          <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">Đăng ký tư vấn 1:1 ngay →</a>
+          <button onclick="openApplyModal()" class="btn btn-gold btn-lg">Nộp hồ sơ ứng tuyển →</button>
           <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
         </div>
         <p class="hero-process">Điền form 2 phút · phỏng vấn 1:1 miễn phí · xác nhận phù hợp trước khi tham gia</p>
-        <p class="hero-note">Cohort tiếp theo: 11/09/2026 · Đang nhận hồ sơ · Tối đa 5 team</p>
+        <p class="hero-note">Đang xét hồ sơ · Tối đa 5 team · Xét theo thứ tự nộp</p>
       </div>
       <div class="hero-visual">
         <svg viewBox="0 0 340 216" xmlns="http://www.w3.org/2000/svg"
           style="width:100%;max-width:380px"
-          aria-label="Kết quả T. T. Tuyến trước và sau Profit Maximizer">
+          role="img"
+          aria-label="Kết quả Tạ Trung Tuyến trước và sau Profit Maximizer: Net Margin từ 10–12% lên ~20%, Net Profit +46%, Revenue +21%">
 
           <!-- TOP LABEL -->
           <text x="170" y="13" text-anchor="middle"
@@ -1100,6 +1158,7 @@
           <h3>Diagnose — Profit X-Ray</h3>
           <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: biết chính xác account đang thủng ở chỗ nào — không phải đoán nữa.</p>
           <p>Chẩn đoán toàn account bằng Profit X-Ray Live · 3-Level Profit Leak (ASIN → Campaign → Keyword). Phân loại ASIN theo 3S Framework · pha vòng đời (Launch/Growth/Mature). Tag mục tiêu Ads (Ranking vs Profit).</p>
+          <p style="font-size:13px;color:var(--green);margin-bottom:0;font-style:italic">Cohort 1: Profit X-Ray soi 1 store ~$10K/tháng → lộ cụm campaign ACOS &gt;105% đang âm. Sau khi xử lý: lợi nhuận +70%, TACOS −3% — doanh thu giữ nguyên.</p>
           <div class="week-result">→ Baseline Snapshot + Profit Leak Hypothesis</div>
         </div>
       </div>
@@ -1109,6 +1168,7 @@
           <h3>Stop the Bleed — Cắt lởm</h3>
           <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: cắt được ít nhất 1 nhóm từ khóa đang đốt tiền, có số liệu trước/sau trong tay.</p>
           <p>Đọc Search Term Report đúng cách + mindset cắt lởm. Tạo Negative Candidate List (Draft → Review → Execute) — cắt waste có kiểm soát ngay từ đầu.</p>
+          <p style="font-size:13px;color:var(--green);margin-bottom:0;font-style:italic">Cohort 1: Cắt campaign lỗ + thanh lý tồn đọng → ACOS từ &gt;105% về ~37% chỉ sau 1 tuần. Biên lợi nhuận tăng gấp rưỡi, đơn giảm nhẹ nhưng net margin bật lên.</p>
           <div class="week-result">→ Negative Keywords execute + waste cắt được (số liệu trước/sau)</div>
         </div>
       </div>
@@ -1118,6 +1178,7 @@
           <h3>Fix Foundation — CVR &amp; Keyword Gap</h3>
           <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: biết listing đang cản ads ở đòn bẩy nào — và đã sửa đòn bẩy đó.</p>
           <p>CVR Health Check (5 đòn bẩy) · Pre-Ads Gate Checklist — sửa 1 đòn bẩy lớn nhất. PRODUCT Keyword Gap (7 tầng) · Bánh đà ASIN Rank.</p>
+          <p style="font-size:13px;color:var(--green);margin-bottom:0;font-style:italic">Cohort 1: Fix listing trước khi đổ Ads → CVR tăng ~2.5 lần, còn tăng được giá bán. Kéo bid xuống từ ~$1.5 về $1.0–1.2/click mà vẫn giữ rank.</p>
           <div class="week-result">→ Foundation/Listing fix #1 đã execute</div>
         </div>
       </div>
@@ -1188,7 +1249,7 @@
   <div class="container">
     <span class="tag">Học viên nói gì</span>
     <h2>Kết quả thật — Số liệu thật</h2>
-    <p class="lead">Đây không phải kết quả "đặc biệt". Đây là kết quả khi đúng hệ thống, đúng người, đúng thời điểm.</p>
+    <p class="lead">2 team đầu tiên của Cohort 1. Số liệu có trước/sau. Không có case ẩn danh nào ở đây.</p>
 
     <div class="testimonials-grid">
       <div class="testi-card">
@@ -1244,7 +1305,7 @@
         </div>
         <div class="testi-body">
           <p class="testi-quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
-          <div class="testi-author">T. T. Tuyến</div>
+          <div class="testi-author">Tạ Trung Tuyến</div>
           <div class="testi-role">Amazon Seller ~2 năm · Net margin từ 10–12% lên ~20%</div>
           <img src="assets/tuyen-result-pm1.webp" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.webp','Kết quả Team Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
         </div>
@@ -1378,7 +1439,7 @@
         <div style="margin-top:16px">
           <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Sellerboard thực tế — Net Profit T1–T3/2026</div>
           <img src="assets/sellerboard-t3-2026.webp" alt="Sellerboard Dashboard Net Profit +130% MTD tháng 3/2026" loading="lazy" class="expandable" onclick="openLBImg('assets/sellerboard-t3-2026.webp','Sellerboard — Net Profit +130% MTD T3/2026 · +234.9% T2/2026 · +69.6% T1/2026')" style="width:100%;border-radius:6px;border:1px solid var(--border);display:block;cursor:zoom-in" />
-          <p style="font-size:12px;color:var(--gray);margin-top:6px;font-family:var(--font-data)">MTD T3/2026: +130.3% · T2/2026: +234.9% · T1/2026: +69.6%</p>
+          <p style="font-size:12px;color:var(--gray);margin-top:6px;font-family:var(--font-data)">MTD T3/2026: +130.3% · T1/2026: +69.6% (so sánh cùng kỳ năm trước)</p>
         </div>
       </div>
     </div>
@@ -1392,15 +1453,15 @@
     <h2>Số lượng có hạn — Chất lượng không giảm</h2>
     <p class="lead" style="max-width:560px;margin:0 auto 28px">
       Chương trình mở theo <strong>đợt (cohort)</strong>, mỗi đợt tối đa <strong>5 team</strong>.
-      Ngày bắt đầu cố định — đóng đăng ký khi đủ số hoặc trước 1 tuần.
+      Hồ sơ được xét theo thứ tự nộp — đủ 5 suất là đóng, không chờ ngày khai giảng.
     </p>
     <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 32px;display:inline-block;text-align:center;box-shadow:var(--shadow)">
-      <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Cohort tiếp theo</div>
-      <div style="font-family:var(--font-data);font-size:26px;font-weight:600;color:var(--green-dark)">11/09/2026</div>
-      <div style="font-size:12px;color:var(--gray);margin-top:6px">Đang nhận hồ sơ · Đóng khi đủ 5 team</div>
+      <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Cohort tiếp theo · Đang xét hồ sơ</div>
+      <div style="font-family:var(--font-data);font-size:26px;font-weight:600;color:var(--green-dark)">5 suất</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:6px">Xét theo thứ tự nộp · Khai giảng 11/09/2026</div>
     </div>
     <div style="margin-top:28px">
-      <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-primary btn-lg">Đăng ký tư vấn 1:1 →</a>
+      <button onclick="openApplyModal()" class="btn btn-primary btn-lg">Nộp hồ sơ ứng tuyển →</button>
     </div>
   </div>
 </section>
@@ -1507,10 +1568,10 @@
 <!-- ─── CTA ───────────────────────────────────────── -->
 <section class="cta-section" id="register">
   <div class="container">
-    <div class="cohort-badge">⚡ Cohort tiếp theo: 11/09/2026 · Tối đa 5 team</div>
-    <h2>Sẵn sàng ngừng chảy máu?</h2>
+    <div class="cohort-badge">⚡ Đang xét hồ sơ · 5 suất · Xét theo thứ tự nộp</div>
+    <h2>Nộp hồ sơ ứng tuyển</h2>
     <p class="sub">
-      Điền form 2 phút — Bình sẽ liên hệ phỏng vấn 1:1 để xác nhận phù hợp.
+      Điền form 2 phút — Bình sẽ liên hệ sắp xếp phỏng vấn 1:1 để xác nhận phù hợp.
       Buổi phỏng vấn hoàn toàn miễn phí, không ràng buộc.
     </p>
     <div style="display:inline-flex;gap:0;background:rgba(255,255,255,.07);border:1px solid rgba(201,162,77,.35);border-radius:var(--radius);padding:16px 28px;margin-bottom:28px;flex-wrap:wrap;justify-content:center;gap:20px;align-items:center">
@@ -1531,12 +1592,14 @@
     </div>
     <div style="max-width:520px;margin:24px auto 28px;background:rgba(168,208,141,.1);border:1px solid rgba(168,208,141,.25);border-radius:var(--radius);padding:18px 24px;text-align:left">
       <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-light);margin-bottom:8px">Cam kết kết quả</div>
-      <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;line-height:1.65">Sau 5 tuần, nếu chưa có ít nhất 1 thay đổi đo được có số liệu trước/sau — chúng tôi tiếp tục coaching thêm <strong style="color:var(--green-light)">2 tuần miễn phí</strong> đến khi bạn có kết quả thật.</p>
+      <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0 0 10px;line-height:1.65">Sau 5 tuần, nếu chưa có ít nhất 1 thay đổi đo được có số liệu trước/sau — chúng tôi coaching thêm <strong style="color:var(--green-light)">2 tuần miễn phí</strong>, không điều kiện, cho đến khi bạn có kết quả thật.</p>
+      <p style="color:rgba(255,255,255,.72);font-size:13px;margin:0;line-height:1.6">Dù kết quả thế nào, bạn giữ lại toàn bộ: Before/After Report, Weekly Decision System, tất cả templates và AI workflow. Những thứ này là của bạn — không ai lấy lại được.</p>
     </div>
-    <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">
-      Đăng ký tư vấn 1:1 →
-    </a>
+    <button onclick="openApplyModal()" class="btn btn-gold btn-lg">
+      Nộp hồ sơ ứng tuyển →
+    </button>
 
+    <p style="font-size:13px;color:rgba(255,255,255,.45);margin:28px 0 12px;letter-spacing:.04em">Đã ứng tuyển rồi? Liên hệ trực tiếp:</p>
     <div class="cta-contact">
       <div class="contact-item">
         <div>
@@ -1552,8 +1615,8 @@
       </div>
       <div class="contact-item">
         <div>
-          <div class="label">Đặt lịch 1:1</div>
-          <a href="https://cal.com/buingocbinh/60min" target="_blank">cal.com/buingocbinh/60min</a>
+          <div class="label">Đặt lịch trao đổi</div>
+          <a href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">cal.com/buingocbinh/60min</a>
         </div>
       </div>
       <div class="contact-item">
@@ -1573,7 +1636,25 @@
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta">
-  <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đặt lịch phỏng vấn miễn phí →</a>
+  <button onclick="openApplyModal()" style="background:none;border:none;font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--white);cursor:pointer">Nộp hồ sơ ứng tuyển →</button>
+</div>
+
+<!-- ─── APPLY MODAL ───────────────────────────────── -->
+<div id="apply-modal" class="apply-modal-overlay" onclick="closeApplyModalOverlay(event)">
+  <div class="apply-modal">
+    <div class="apply-modal-header">
+      <span>Hồ sơ ứng tuyển · Profit Maximizer Cohort</span>
+      <button class="apply-modal-close" onclick="closeApplyModal()" aria-label="Đóng">×</button>
+    </div>
+    <iframe
+      id="apply-iframe"
+      src=""
+      data-src="https://silky-heron-50e.notion.site/ebd/a46c1e1cca0643c68ffd782519d6bcb1"
+      title="Form ứng tuyển Profit Maximizer"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
 </div>
 
 <!-- ─── LIGHTBOX ──────────────────────────────────── -->
@@ -1583,6 +1664,24 @@
 </div>
 
 <script>
+  function openApplyModal() {
+    const modal = document.getElementById('apply-modal');
+    const iframe = document.getElementById('apply-iframe');
+    if (!iframe.getAttribute('src')) iframe.src = iframe.dataset.src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeApplyModal() {
+    document.getElementById('apply-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeApplyModalOverlay(e) {
+    if (e.target === document.getElementById('apply-modal')) closeApplyModal();
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeApplyModal();
+  });
+
   function toggleFaq(btn) {
     const answer = btn.nextElementSibling;
     const isOpen = answer.classList.contains('open');
