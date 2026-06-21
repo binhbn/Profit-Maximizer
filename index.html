@@ -165,7 +165,7 @@
     .hero-cta-group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
     .hero-note {
       font-size: 13px;
-      color: rgba(255,255,255,.5);
+      color: rgba(255,255,255,.72);
       margin-top: 20px;
       font-family: var(--font-data);
     }
@@ -192,8 +192,8 @@
       color: var(--white);
     }
     .stat-item .lbl {
-      font-size: 12px;
-      color: rgba(255,255,255,.8);
+      font-size: 13px;
+      color: rgba(255,255,255,1);
       font-family: var(--font-head);
       font-weight: 600;
       letter-spacing: .04em;
@@ -645,7 +645,7 @@
       font-size: 14px;
       color: rgba(255,255,255,.7);
     }
-    .contact-item .label { font-family: var(--font-data); color: var(--green-light); font-size: 12px; }
+    .contact-item .label { font-family: var(--font-data); color: rgba(255,255,255,.80); font-size: 12px; }
     .contact-item a { color: var(--white); font-weight: 500; }
     .contact-item a:hover { color: var(--gold); }
 
@@ -716,6 +716,14 @@
     @media (max-width: 480px) {
       .stats-strip .inner { gap: 24px; }
       .hero-cta-group { flex-direction: column; align-items: flex-start; }
+      .nav-logo { height: 48px; }
+      h1 { font-size: 24px; }
+      .hero { padding: 40px 0 32px; }
+      .hero-who { display: none; }
+      .hero-outcome { display: none; }
+      .hero .eyebrow { letter-spacing: .08em; margin-bottom: 14px; }
+      .hero-proof { flex-direction: column; align-items: flex-start; gap: 2px; display: flex; width: 100%; margin-bottom: 14px; }
+      .hero .subtitle { font-size: 15px; margin-bottom: 20px; }
     }
 
     /* Sticky bottom CTA for mobile */
@@ -744,7 +752,7 @@
       align-items: center;
     }
     .hero-visual { display: flex; align-items: center; justify-content: center; }
-    @media (max-width: 900px) { .hero-visual { display: none; } }
+    @media (max-width: 900px) { .hero-visual { display: none; } .hero-grid { grid-template-columns: 1fr; } }
 
     /* ─── LIGHTBOX ──────────────────────────────────── */
     .lb-overlay {
@@ -814,16 +822,16 @@
       font-family: var(--font-data);
       font-size: 14px;
       font-weight: 600;
-      color: var(--green-light);
+      color: var(--white);
       white-space: nowrap;
     }
     .hero-proof .proof-detail {
       font-size: 13px;
-      color: rgba(255,255,255,.55);
+      color: rgba(255,255,255,.80);
     }
     .hero-process {
       font-size: 13px;
-      color: rgba(255,255,255,.45);
+      color: rgba(255,255,255,.72);
       margin: 10px 0 0;
     }
   </style>
@@ -847,6 +855,7 @@
       <div class="hero-content">
         <p class="eyebrow">ECom GreenWay Academy · Profit Maximizer Cohort</p>
         <h1>
+          <span class="hero-who">Amazon Sellers $10K–$50K/tháng:<br></span>
           Doanh số tăng.<br>
           Lợi nhuận <em>biến mất</em>.<br>
           5 tuần để fix điều đó.
@@ -864,52 +873,96 @@
           <a href="#roadmap" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)">Xem lộ trình 5 tuần</a>
         </div>
         <p class="hero-process">Điền form 2 phút · phỏng vấn 1:1 miễn phí · xác nhận phù hợp trước khi tham gia</p>
-        <p class="hero-note">Cohort tiếp theo: dự kiến 11/09/2026 · Tối đa 5 team</p>
+        <p class="hero-note">Cohort tiếp theo: 11/09/2026 · Đang nhận hồ sơ · Tối đa 5 team</p>
       </div>
       <div class="hero-visual">
-        <svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px;filter:drop-shadow(0 4px 28px rgba(0,0,0,.35))" aria-hidden="true">
-          <!-- Card -->
-          <rect x="0" y="0" width="430" height="260" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(168,208,141,.2)" stroke-width="1"/>
-          <!-- Top label -->
-          <text x="20" y="28" font-family="Montserrat,sans-serif" font-size="9.5" font-weight="700" letter-spacing="1.8" fill="rgba(168,208,141,.5)">VẤN ĐỀ PHỔ BIẾN</text>
-          <!-- Legend -->
-          <line x1="194" y1="23" x2="212" y2="23" stroke="#A8D08D" stroke-width="2" stroke-linecap="round"/>
-          <text x="216" y="27" font-family="Inter,sans-serif" font-size="10" fill="rgba(168,208,141,.85)">Doanh số</text>
-          <line x1="295" y1="23" x2="313" y2="23" stroke="#E0B95A" stroke-width="2" stroke-dasharray="4 2.5" stroke-linecap="round"/>
-          <text x="317" y="27" font-family="Inter,sans-serif" font-size="10" fill="rgba(224,185,90,.85)">Lợi nhuận</text>
-          <!-- Grid lines -->
-          <line x1="40" y1="60" x2="360" y2="60" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-          <line x1="40" y1="100" x2="360" y2="100" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-          <line x1="40" y1="140" x2="360" y2="140" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-          <line x1="40" y1="185" x2="360" y2="185" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-          <!-- Revenue fill -->
-          <polygon points="50,168 130,148 215,122 300,92 360,68 360,185 50,185" fill="rgba(168,208,141,.08)"/>
-          <!-- Revenue line -->
-          <polyline points="50,168 130,148 215,122 300,92 360,68" fill="none" stroke="#A8D08D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Profit fill -->
-          <polygon points="50,168 130,175 215,184 300,194 360,202 360,185 50,185" fill="rgba(224,185,90,.06)"/>
-          <!-- Profit line (dashed) -->
-          <polyline points="50,168 130,175 215,184 300,194 360,202" fill="none" stroke="#E0B95A" stroke-width="2" stroke-dasharray="6 3" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Start dot -->
-          <circle cx="50" cy="168" r="4" fill="#A8D08D"/>
-          <!-- End dots -->
-          <circle cx="360" cy="68" r="5" fill="#A8D08D"/>
-          <circle cx="360" cy="202" r="5" fill="#E0B95A"/>
-          <!-- Revenue annotation -->
-          <text x="369" y="64" font-family="Roboto Mono,monospace" font-size="13" font-weight="600" fill="#A8D08D">+30%</text>
-          <text x="369" y="78" font-family="Inter,sans-serif" font-size="9" fill="rgba(168,208,141,.65)">doanh số</text>
-          <!-- Profit annotation -->
-          <text x="369" y="198" font-family="Roboto Mono,monospace" font-size="13" font-weight="600" fill="#E0B95A">-70%</text>
-          <text x="369" y="212" font-family="Inter,sans-serif" font-size="9" fill="rgba(224,185,90,.65)">lợi nhuận</text>
-          <!-- X axis -->
-          <line x1="30" y1="210" x2="370" y2="210" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-          <text x="50"  y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T1</text>
-          <text x="130" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T2</text>
-          <text x="215" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T3</text>
-          <text x="300" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T4</text>
-          <text x="360" y="224" text-anchor="middle" font-family="Roboto Mono,monospace" font-size="8" fill="rgba(255,255,255,.28)">T5</text>
-          <!-- Caption -->
-          <text x="215" y="248" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" fill="rgba(255,255,255,.32)">H1/2025 — kịch bản đang xảy ra với nhiều seller</text>
+        <svg viewBox="0 0 340 216" xmlns="http://www.w3.org/2000/svg"
+          style="width:100%;max-width:380px"
+          aria-label="Kết quả T. T. Tuyến trước và sau Profit Maximizer">
+
+          <!-- TOP LABEL -->
+          <text x="170" y="13" text-anchor="middle"
+            font-family="Montserrat,sans-serif" font-size="10" font-weight="700"
+            letter-spacing="1.6" fill="rgba(168,208,141,.55)">KẾT QUẢ · T. T. TUYẾN · COHORT 1</text>
+
+          <!-- ══════════════════════════════ -->
+          <!--  TRƯỚC  x=6  w=140  h=190     -->
+          <!-- ══════════════════════════════ -->
+          <rect x="6" y="20" width="140" height="190" rx="9"
+            fill="rgba(170,40,40,.12)" stroke="rgba(220,90,90,.45)" stroke-width="1"/>
+          <rect x="6" y="20" width="140" height="38" rx="9" fill="rgba(140,30,30,.6)"/>
+          <rect x="6" y="42" width="140" height="16" fill="rgba(140,30,30,.6)"/>
+          <text x="76" y="44" text-anchor="middle"
+            font-family="Montserrat,sans-serif" font-size="12" font-weight="800"
+            fill="rgba(255,175,175,.97)">TRƯỚC PM</text>
+
+          <!-- Net Margin label + value -->
+          <text x="20" y="76" font-family="Montserrat,sans-serif" font-size="10"
+            font-weight="700" letter-spacing="1" fill="rgba(255,145,145,.72)">NET MARGIN</text>
+          <text x="20" y="106" font-family="Roboto Mono,monospace" font-size="26"
+            font-weight="700" fill="rgba(255,175,175,.95)">10–12%</text>
+          <!-- Bar: 57% fill -->
+          <rect x="20" y="112" width="110" height="6" rx="3" fill="rgba(255,255,255,.08)"/>
+          <rect x="20" y="112" width="63" height="6" rx="3" fill="rgba(210,75,75,.75)"/>
+
+          <!-- Divider -->
+          <line x1="20" y1="130" x2="132" y2="130" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
+          <!-- Problem text -->
+          <text x="20" y="150" font-family="Inter,sans-serif" font-size="11.5"
+            fill="rgba(255,175,175,.85)">Doanh số tăng</text>
+          <text x="20" y="168" font-family="Inter,sans-serif" font-size="11.5"
+            fill="rgba(255,175,175,.85)">nhưng profit không theo</text>
+
+          <!-- Attribution -->
+          <text x="76" y="198" text-anchor="middle" font-family="Inter,sans-serif"
+            font-size="10" fill="rgba(255,145,145,.4)">Amazon Seller ~2 năm</text>
+
+          <!-- ══════════════════════════════ -->
+          <!--  ARROW  center x=170           -->
+          <!-- ══════════════════════════════ -->
+          <line x1="170" y1="44" x2="170" y2="206"
+            stroke="rgba(168,208,141,.13)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="170" y="116" text-anchor="middle"
+            font-family="Montserrat,sans-serif" font-size="18" font-weight="900"
+            fill="rgba(168,208,141,.5)">→</text>
+          <text x="170" y="132" text-anchor="middle"
+            font-family="Montserrat,sans-serif" font-size="10" font-weight="700"
+            letter-spacing="1" fill="rgba(168,208,141,.4)">5 TUẦN</text>
+
+          <!-- ══════════════════════════════ -->
+          <!--  SAU PM  x=194  w=140  h=190  -->
+          <!-- ══════════════════════════════ -->
+          <rect x="194" y="20" width="140" height="190" rx="9"
+            fill="rgba(60,120,30,.15)" stroke="rgba(168,208,141,.55)" stroke-width="1.5"/>
+          <rect x="194" y="20" width="140" height="38" rx="9" fill="rgba(50,105,20,.65)"/>
+          <rect x="194" y="42" width="140" height="16" fill="rgba(50,105,20,.65)"/>
+          <text x="264" y="44" text-anchor="middle"
+            font-family="Montserrat,sans-serif" font-size="12" font-weight="800"
+            fill="rgba(195,245,170,.98)">SAU PM</text>
+
+          <!-- NET PROFIT label -->
+          <text x="208" y="76" font-family="Montserrat,sans-serif" font-size="10"
+            font-weight="700" letter-spacing="1" fill="rgba(168,208,141,.75)">NET PROFIT</text>
+
+          <!-- +46% GOLD — hero number -->
+          <text x="208" y="118" font-family="Roboto Mono,monospace" font-size="42"
+            font-weight="700" fill="#C9A24D">+46%</text>
+          <text x="208" y="133" font-family="Inter,sans-serif" font-size="11"
+            fill="rgba(201,162,77,.82)">↑ trong ~1 tháng</text>
+
+          <!-- Divider -->
+          <line x1="208" y1="146" x2="320" y2="146" stroke="rgba(168,208,141,.15)" stroke-width="1"/>
+
+          <!-- Supporting metrics -->
+          <text x="208" y="166" font-family="Inter,sans-serif" font-size="13"
+            font-weight="500" fill="rgba(168,208,141,.92)">Revenue  +21%</text>
+          <text x="208" y="184" font-family="Inter,sans-serif" font-size="13"
+            fill="rgba(168,208,141,.85)">Margin  ~20%  <tspan font-weight="700" fill="#C9A24D">×2</tspan></text>
+
+          <!-- Attribution -->
+          <text x="264" y="200" text-anchor="middle" font-family="Inter,sans-serif"
+            font-size="11" fill="rgba(168,208,141,.48)">sau 5 tuần PM</text>
         </svg>
       </div>
     </div>
@@ -969,6 +1022,7 @@
         <p>Mọi thứ dựa vào cảm tính và firefighting liên tục — không có baseline, không có cadence.</p>
       </div>
     </div>
+    <p style="margin-top:28px;font-size:16px;color:var(--gray)">Ba gốc rễ này không cần thêm kiến thức để fix — cần một hệ thống để ra quyết định đúng lần đầu.</p>
   </div>
 </section>
 
@@ -1011,6 +1065,7 @@
       </p>
     </div>
 
+    <div style="overflow-x:auto">
     <table class="overview-table">
       <thead>
         <tr><th>Thông tin</th><th>Chi tiết</th></tr>
@@ -1025,6 +1080,7 @@
         <tr><td>Quy mô</td><td>Tối đa <strong>5 team/cohort</strong> — đảm bảo chất lượng 1:1</td></tr>
       </tbody>
     </table>
+    </div>
   </div>
 </section>
 
@@ -1040,6 +1096,7 @@
         <div class="week-num"><div class="wn">Tuần</div><div class="wd">1</div></div>
         <div class="week-body">
           <h3>Diagnose — Profit X-Ray</h3>
+          <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: biết chính xác account đang thủng ở chỗ nào — không phải đoán nữa.</p>
           <p>Chẩn đoán toàn account bằng Profit X-Ray Live · 3-Level Profit Leak (ASIN → Campaign → Keyword). Phân loại ASIN theo 3S Framework · pha vòng đời (Launch/Growth/Mature). Tag mục tiêu Ads (Ranking vs Profit).</p>
           <div class="week-result">→ Baseline Snapshot + Profit Leak Hypothesis</div>
         </div>
@@ -1048,6 +1105,7 @@
         <div class="week-num"><div class="wn">Tuần</div><div class="wd">2</div></div>
         <div class="week-body">
           <h3>Stop the Bleed — Cắt lởm</h3>
+          <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: cắt được ít nhất 1 nhóm từ khóa đang đốt tiền, có số liệu trước/sau trong tay.</p>
           <p>Đọc Search Term Report đúng cách + mindset cắt lởm. Tạo Negative Candidate List (Draft → Review → Execute) — cắt waste có kiểm soát ngay từ đầu.</p>
           <div class="week-result">→ Negative Keywords execute + waste cắt được (số liệu trước/sau)</div>
         </div>
@@ -1056,6 +1114,7 @@
         <div class="week-num"><div class="wn">Tuần</div><div class="wd">3</div></div>
         <div class="week-body">
           <h3>Fix Foundation — CVR &amp; Keyword Gap</h3>
+          <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: biết listing đang cản ads ở đòn bẩy nào — và đã sửa đòn bẩy đó.</p>
           <p>CVR Health Check (5 đòn bẩy) · Pre-Ads Gate Checklist — sửa 1 đòn bẩy lớn nhất. PRODUCT Keyword Gap (7 tầng) · Bánh đà ASIN Rank.</p>
           <div class="week-result">→ Foundation/Listing fix #1 đã execute</div>
         </div>
@@ -1064,6 +1123,7 @@
         <div class="week-num"><div class="wn">Tuần</div><div class="wd">4</div></div>
         <div class="week-body">
           <h3>Scale to Winner</h3>
+          <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: có Before/After Report của chính account mình — bằng chứng thay đổi bằng số thật.</p>
           <p>Pre-Scale Gate (5 tiêu chí) trước khi scale. Sweet-spot bid, 5 đòn bẩy scale, tỉ trọng spend, rollback triggers (bid ≤25%/lần, 7–14 ngày data). Viết Before/After Report với data thực.</p>
           <div class="week-result">→ Scale Winner execute + Before/After Report</div>
         </div>
@@ -1072,6 +1132,7 @@
         <div class="week-num"><div class="wn">Tuần</div><div class="wd">5</div></div>
         <div class="week-body">
           <h3>Lock System + AI/Automation</h3>
+          <p style="color:var(--green-dark);font-weight:600;font-size:14px;margin-bottom:6px">Sau tuần này: có hệ thống chạy 30 phút/tuần để duy trì kết quả — không cần phụ thuộc vào coach.</p>
           <p>Framework APEX chuẩn hóa hệ thống. Weekly Review Rhythm (30 phút/tuần). Ứng dụng AI &amp; Automation để X3–X5 năng suất. Lập 90-Day Roadmap + present + graduation.</p>
           <div class="week-result">→ Weekly Decision System + AI workflow + 90-Day Roadmap + Graduation</div>
         </div>
@@ -1183,7 +1244,7 @@
           <p class="testi-quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
           <div class="testi-author">T. T. Tuyến</div>
           <div class="testi-role">Amazon Seller ~2 năm · Net margin từ 10–12% lên ~20%</div>
-          <img src="assets/tuyen-result-pm1.jpg" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.jpg','Kết quả Team Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
+          <img src="assets/tuyen-result-pm1.webp" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.webp','Kết quả Team Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
         </div>
       </div>
     </div>
@@ -1196,6 +1257,7 @@
     <span class="tag">Cách tiếp cận</span>
     <h2>5 vấn đề bạn đang gặp — và Profit Maximizer fix như thế nào</h2>
 
+    <div style="overflow-x:auto">
     <table class="compare-table">
       <thead>
         <tr>
@@ -1232,6 +1294,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </section>
 
@@ -1272,7 +1335,7 @@
     <div class="coach-layout">
       <div>
         <div class="coach-avatar">
-          <img src="assets/binhbn avatar 3.jpg" alt="Bùi Ngọc Bình" loading="lazy" />
+          <img src="assets/binhbn-avatar-3.webp" alt="Bùi Ngọc Bình" loading="lazy" />
         </div>
       </div>
       <div>
@@ -1299,7 +1362,7 @@
             <div style="font-size:12px;color:var(--gray)">Amazon Service Provider Network</div>
           </div>
         </div>
-        <p style="font-size:15px">Đã đồng hành cùng nhiều doanh nghiệp Việt Nam từ zero đến profitable trên Amazon.</p>
+        <p style="font-size:15px">Tất cả học viên Profit Maximizer được coach trực tiếp trên account thật — không phải case study chung chung.</p>
         <div class="coach-story">
           <p>
             Nửa đầu 2025, doanh số tăng hơn 30% — nhưng lợi nhuận giảm sâu 70%. Đúng là vấn đề nhiều seller đang gặp: <em>doanh số tăng ≠ lợi nhuận tăng</em>.
@@ -1309,6 +1372,11 @@
             <br><br>
             <strong style="color:var(--gray-dark)">Những gì dạy trong Profit Maximizer là hệ thống đã dùng để fix chính business của mình.</strong>
           </p>
+        </div>
+        <div style="margin-top:16px">
+          <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Sellerboard thực tế — Net Profit T1–T3/2026</div>
+          <img src="assets/sellerboard-t3-2026.webp" alt="Sellerboard Dashboard Net Profit +130% MTD tháng 3/2026" loading="lazy" class="expandable" onclick="openLBImg('assets/sellerboard-t3-2026.webp','Sellerboard — Net Profit +130% MTD T3/2026 · +234.9% T2/2026 · +69.6% T1/2026')" style="width:100%;border-radius:6px;border:1px solid var(--border);display:block;cursor:zoom-in" />
+          <p style="font-size:12px;color:var(--gray);margin-top:6px;font-family:var(--font-data)">MTD T3/2026: +130.3% · T2/2026: +234.9% · T1/2026: +69.6%</p>
         </div>
       </div>
     </div>
@@ -1394,7 +1462,7 @@
 <!-- ─── JOURNEY MAP ───────────────────────────────── -->
 <section class="section">
   <div class="container">
-    <span class="tag">Hành trình EGW</span>
+    <span class="tag">Vị trí trong lộ trình EGW</span>
     <h2>Profit Maximizer nằm ở đâu trong lộ trình của bạn?</h2>
     <p>Chương trình này là bước 3 trong hệ thống đào tạo GreenWay — dành cho seller đã có sản phẩm và cần kiểm soát lợi nhuận.</p>
 
@@ -1446,22 +1514,22 @@
     <div style="display:inline-flex;gap:0;background:rgba(255,255,255,.07);border:1px solid rgba(201,162,77,.35);border-radius:var(--radius);padding:16px 28px;margin-bottom:28px;flex-wrap:wrap;justify-content:center;gap:20px;align-items:center">
       <div style="text-align:center">
         <div style="font-family:var(--font-data);font-size:19px;font-weight:600;color:var(--gold)">$500–$2,000</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px">ads lãng phí / tháng trì hoãn</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.78);margin-top:2px">ads lãng phí / tháng trì hoãn</div>
       </div>
       <div style="color:rgba(255,255,255,.25);font-size:20px;font-family:var(--font-data)">×</div>
       <div style="text-align:center">
         <div style="font-family:var(--font-data);font-size:19px;font-weight:600;color:var(--gold)">3 tháng</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px">trung bình loay hoay không fix</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.78);margin-top:2px">trung bình loay hoay không fix</div>
       </div>
       <div style="color:rgba(255,255,255,.25);font-size:20px;font-family:var(--font-data)">=</div>
       <div style="text-align:center">
         <div style="font-family:var(--font-data);font-size:19px;font-weight:600;color:var(--gold)">$1,500–$6,000</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:2px">chi phí của sự trì hoãn</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.78);margin-top:2px">chi phí của sự trì hoãn</div>
       </div>
     </div>
     <div style="max-width:520px;margin:24px auto 28px;background:rgba(168,208,141,.1);border:1px solid rgba(168,208,141,.25);border-radius:var(--radius);padding:18px 24px;text-align:left">
       <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-light);margin-bottom:8px">Cam kết kết quả</div>
-      <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;line-height:1.65">Sau 5 tuần, nếu chưa có ít nhất 1 thay đổi đo được có số liệu trước/sau — chúng tôi đồng hành thêm <strong style="color:var(--green-light)">2 tuần miễn phí</strong> đến khi bạn có kết quả thật.</p>
+      <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;line-height:1.65">Sau 5 tuần, nếu chưa có ít nhất 1 thay đổi đo được có số liệu trước/sau — chúng tôi tiếp tục coaching thêm <strong style="color:var(--green-light)">2 tuần miễn phí</strong> đến khi bạn có kết quả thật.</p>
     </div>
     <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank" class="btn btn-gold btn-lg">
       Đăng ký tư vấn 1:1 →
@@ -1503,7 +1571,7 @@
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta">
-  <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đăng ký tư vấn 1:1 →</a>
+  <a href="https://silky-heron-50e.notion.site/a46c1e1cca0643c68ffd782519d6bcb1?pvs=105" target="_blank">Đặt lịch phỏng vấn miễn phí →</a>
 </div>
 
 <!-- ─── LIGHTBOX ──────────────────────────────────── -->
