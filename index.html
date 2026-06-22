@@ -32,11 +32,15 @@
 
       --radius: 8px;
       --shadow: 0 2px 16px rgba(44,94,26,0.08);
+
+      /* ── HERO BACKGROUND CONTROLS ── */
+      --hero-blur: 7px;   /* độ mờ ảnh nền hero */
+      --scrim: .90;       /* độ đậm lớp phủ xanh (0–1) */
     }
 
     /* ─── RESET ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
     body {
       font-family: var(--font-body);
       font-size: 16px;
@@ -114,6 +118,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 24px;
       max-width: 980px;
       margin: 0 auto;
       padding: 0 24px;
@@ -127,23 +132,58 @@
       width: auto;
       display: block;
     }
+    .nav-menu { display: flex; align-items: center; gap: 28px; margin: 0 auto; }
+    .nav-menu a {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-dark);
+      position: relative;
+      padding: 4px 0;
+      transition: color .15s;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: var(--green);
+      transition: width .2s;
+    }
+    .nav-menu a:hover { color: var(--green); }
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after { width: 100%; }
+    .nav-menu a.active { color: var(--green); }
+    @media (max-width: 900px) { .nav-menu { display: none; } }
     .nav-cta { font-size: 14px; padding: 10px 22px; }
 
     /* ─── HERO ───────────────────────────────────── */
     .hero {
       background: var(--green-dark);
-      padding: 80px 0 64px;
+      padding: 96px 0 88px;
       position: relative;
       overflow: hidden;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
     }
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(76,140,43,.25) 0%, transparent 65%);
+      background: url('assets/event-seller-2.webp') center 32% / cover;
+      filter: blur(var(--hero-blur)) saturate(1.05);
+      transform: scale(1.12);
       pointer-events: none;
     }
-    .hero .container { position: relative; }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(98deg, rgba(46,94,26,var(--scrim)) 0%, rgba(46,94,26,calc(var(--scrim) - .06)) 40%, rgba(46,94,26,calc(var(--scrim) - .42)) 78%, rgba(46,94,26,calc(var(--scrim) - .55)) 100%),
+        radial-gradient(ellipse at 72% 48%, rgba(76,140,43,.28) 0%, transparent 62%);
+    }
+    .hero .container { position: relative; z-index: 2; width: 100%; }
     .hero .eyebrow {
       font-family: var(--font-head);
       font-size: 12px;
@@ -153,8 +193,16 @@
       color: var(--green-light);
       margin-bottom: 20px;
     }
-    .hero h1 { color: var(--white); margin-bottom: 24px; max-width: 780px; }
+    .hero h1 { color: var(--white); margin-bottom: 24px; max-width: 600px; text-shadow: 0 1px 24px rgba(0,0,0,.25); }
     .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero h1 .who {
+      font-size: .44em;
+      font-weight: 700;
+      color: var(--green-light);
+      display: block;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
     .hero .subtitle {
       font-size: 17px;
       color: rgba(255,255,255,.75);
@@ -719,7 +767,7 @@
       .nav-logo { height: 48px; }
       h1 { font-size: 24px; }
       .hero { padding: 40px 0 32px; }
-      .hero-who { display: none; }
+      .hero h1 .who { display: none; }
       .hero-outcome { display: none; }
       .hero .eyebrow { letter-spacing: .08em; margin-bottom: 14px; }
       .hero-proof { flex-direction: column; align-items: flex-start; gap: 2px; display: flex; width: 100%; margin-bottom: 14px; }
@@ -800,12 +848,61 @@
     /* ─── HERO GRID ─────────────────────────────────── */
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 36px;
+      grid-template-columns: 1fr 360px;
+      gap: 44px;
       align-items: center;
     }
-    .hero-visual { display: flex; align-items: center; justify-content: center; }
-    @media (max-width: 900px) { .hero-visual { display: none; } .hero-grid { grid-template-columns: 1fr; } }
+
+    /* ─── PROOF CARD — Phương án B: Trước / Sau ─── */
+    .visual { display: flex; align-items: center; justify-content: center; }
+    .glass {
+      background: rgba(18,42,8,.62);
+      border: 1px solid rgba(168,208,141,.32);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.42);
+    }
+    .b-wrap { padding: 22px; width: 100%; }
+    .b-title {
+      font-family: var(--font-head);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(168,208,141,.7);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .b-grid { display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 6px; }
+    .b-col { border-radius: 12px; padding: 16px 14px; text-align: center; }
+    .b-col.before { background: rgba(150,40,40,.16); border: 1px solid rgba(220,90,90,.4); }
+    .b-col.after  { background: rgba(60,120,30,.18); border: 1px solid rgba(168,208,141,.5); }
+    .b-tag { font-family: var(--font-head); font-size: 10px; font-weight: 800; letter-spacing: .06em; margin-bottom: 12px; }
+    .b-col.before .b-tag { color: rgba(255,170,170,.95); }
+    .b-col.after  .b-tag { color: rgba(195,245,170,.98); }
+    .b-num { font-family: var(--font-data); font-weight: 700; line-height: 1; }
+    .b-col.before .b-num { font-size: 26px; color: rgba(255,175,175,.95); }
+    .b-col.after  .b-num { font-size: 40px; color: var(--gold); }
+    .b-sub { font-size: 11px; margin-top: 8px; line-height: 1.4; }
+    .b-col.before .b-sub { color: rgba(255,175,175,.8); }
+    .b-col.after  .b-sub { color: rgba(168,208,141,.9); }
+    .b-arrow { text-align: center; color: rgba(168,208,141,.6); font-size: 20px; font-weight: 900; }
+    .b-foot {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(168,208,141,.15);
+      font-size: 12px;
+    }
+    .b-foot.tight { margin-top: 8px; padding-top: 0; border: none; }
+    .b-foot .fk { color: rgba(255,255,255,.65); }
+    .b-foot .fv { font-family: var(--font-data); font-weight: 600; color: var(--green-light); }
+    .b-attr { text-align: center; font-size: 10.5px; color: rgba(255,255,255,.42); margin-top: 12px; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .visual { max-width: 360px; margin: 0 auto; }
+    }
 
     /* ─── LIGHTBOX ──────────────────────────────────── */
     .lb-overlay {
@@ -999,18 +1096,28 @@
         <img src="assets/Ecom Greenway Logo.png" alt="ECom GreenWay" class="nav-logo" />
       </a>
     </div>
+    <div class="nav-menu">
+      <a href="https://www.ecomgreenway.com/" target="_blank" rel="noopener">Trang chủ</a>
+      <a href="#program" class="active">Chương trình</a>
+      <a href="#roadmap">Lộ trình</a>
+      <a href="#results">Kết quả</a>
+      <a href="#coach">Coach</a>
+      <a href="#faq">FAQ</a>
+    </div>
     <button onclick="openApplyModal()" class="btn btn-gold nav-cta">Nộp hồ sơ →</button>
   </div>
 </nav>
 
 <!-- ─── HERO ─────────────────────────────────────── -->
 <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
         <p class="eyebrow">ECom GreenWay Academy · Profit Maximizer Cohort</p>
         <h1>
-          <span class="hero-who">Amazon Sellers $10K–$50K/tháng:<br></span>
+          <span class="who">Amazon Sellers $10K–$50K/tháng</span>
           Doanh số tăng.<br>
           Lợi nhuận <em>biến mất</em>.<br>
           5 tuần để fix điều đó.
@@ -1030,96 +1137,26 @@
         <p class="hero-process">Điền form 2 phút · phỏng vấn 1:1 miễn phí · xác nhận phù hợp trước khi tham gia</p>
         <p class="hero-note">Đang xét hồ sơ · Tối đa 5 team · Xét theo thứ tự nộp</p>
       </div>
-      <div class="hero-visual">
-        <svg viewBox="0 0 340 216" xmlns="http://www.w3.org/2000/svg"
-          style="width:100%;max-width:380px"
-          role="img"
-          aria-label="Kết quả T. T. Tuyến trước và sau Profit Maximizer: Net Margin từ 10–12% lên ~20%, Net Profit +46%, Revenue +21%">
-
-          <!-- TOP LABEL -->
-          <text x="170" y="13" text-anchor="middle"
-            font-family="Montserrat,sans-serif" font-size="10" font-weight="700"
-            letter-spacing="1.6" fill="rgba(168,208,141,.55)">KẾT QUẢ · T. T. TUYẾN · COHORT 1</text>
-
-          <!-- ══════════════════════════════ -->
-          <!--  TRƯỚC  x=6  w=140  h=190     -->
-          <!-- ══════════════════════════════ -->
-          <rect x="6" y="20" width="140" height="190" rx="9"
-            fill="rgba(170,40,40,.12)" stroke="rgba(220,90,90,.45)" stroke-width="1"/>
-          <rect x="6" y="20" width="140" height="38" rx="9" fill="rgba(140,30,30,.6)"/>
-          <rect x="6" y="42" width="140" height="16" fill="rgba(140,30,30,.6)"/>
-          <text x="76" y="44" text-anchor="middle"
-            font-family="Montserrat,sans-serif" font-size="12" font-weight="800"
-            fill="rgba(255,175,175,.97)">TRƯỚC PM</text>
-
-          <!-- Net Margin label + value -->
-          <text x="20" y="76" font-family="Montserrat,sans-serif" font-size="10"
-            font-weight="700" letter-spacing="1" fill="rgba(255,145,145,.72)">NET MARGIN</text>
-          <text x="20" y="106" font-family="Roboto Mono,monospace" font-size="26"
-            font-weight="700" fill="rgba(255,175,175,.95)">10–12%</text>
-          <!-- Bar: 57% fill -->
-          <rect x="20" y="112" width="110" height="6" rx="3" fill="rgba(255,255,255,.08)"/>
-          <rect x="20" y="112" width="63" height="6" rx="3" fill="rgba(210,75,75,.75)"/>
-
-          <!-- Divider -->
-          <line x1="20" y1="130" x2="132" y2="130" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-
-          <!-- Problem text -->
-          <text x="20" y="150" font-family="Inter,sans-serif" font-size="11.5"
-            fill="rgba(255,175,175,.85)">Doanh số tăng</text>
-          <text x="20" y="168" font-family="Inter,sans-serif" font-size="11.5"
-            fill="rgba(255,175,175,.85)">profit đứng yên</text>
-
-          <!-- Attribution -->
-          <text x="76" y="198" text-anchor="middle" font-family="Inter,sans-serif"
-            font-size="10" fill="rgba(255,145,145,.4)">Amazon Seller ~2 năm</text>
-
-          <!-- ══════════════════════════════ -->
-          <!--  ARROW  center x=170           -->
-          <!-- ══════════════════════════════ -->
-          <line x1="170" y1="44" x2="170" y2="206"
-            stroke="rgba(168,208,141,.13)" stroke-width="1" stroke-dasharray="4 3"/>
-          <text x="170" y="116" text-anchor="middle"
-            font-family="Montserrat,sans-serif" font-size="18" font-weight="900"
-            fill="rgba(168,208,141,.5)">→</text>
-          <text x="170" y="132" text-anchor="middle"
-            font-family="Montserrat,sans-serif" font-size="10" font-weight="700"
-            letter-spacing="1" fill="rgba(168,208,141,.4)">5 TUẦN</text>
-
-          <!-- ══════════════════════════════ -->
-          <!--  SAU PM  x=194  w=140  h=190  -->
-          <!-- ══════════════════════════════ -->
-          <rect x="194" y="20" width="140" height="190" rx="9"
-            fill="rgba(60,120,30,.15)" stroke="rgba(168,208,141,.55)" stroke-width="1.5"/>
-          <rect x="194" y="20" width="140" height="38" rx="9" fill="rgba(50,105,20,.65)"/>
-          <rect x="194" y="42" width="140" height="16" fill="rgba(50,105,20,.65)"/>
-          <text x="264" y="44" text-anchor="middle"
-            font-family="Montserrat,sans-serif" font-size="12" font-weight="800"
-            fill="rgba(195,245,170,.98)">SAU PM</text>
-
-          <!-- NET PROFIT label -->
-          <text x="208" y="76" font-family="Montserrat,sans-serif" font-size="10"
-            font-weight="700" letter-spacing="1" fill="rgba(168,208,141,.75)">NET PROFIT</text>
-
-          <!-- +46% GOLD — hero number -->
-          <text x="208" y="118" font-family="Roboto Mono,monospace" font-size="42"
-            font-weight="700" fill="#C9A24D">+46%</text>
-          <text x="208" y="133" font-family="Inter,sans-serif" font-size="11"
-            fill="rgba(201,162,77,.82)">↑ trong ~1 tháng</text>
-
-          <!-- Divider -->
-          <line x1="208" y1="146" x2="320" y2="146" stroke="rgba(168,208,141,.15)" stroke-width="1"/>
-
-          <!-- Supporting metrics -->
-          <text x="208" y="166" font-family="Inter,sans-serif" font-size="13"
-            font-weight="500" fill="rgba(168,208,141,.92)">Revenue  +21%</text>
-          <text x="208" y="184" font-family="Inter,sans-serif" font-size="13"
-            fill="rgba(168,208,141,.85)">Margin  ~20%  <tspan font-weight="700" fill="#C9A24D">×2</tspan></text>
-
-          <!-- Attribution -->
-          <text x="264" y="200" text-anchor="middle" font-family="Inter,sans-serif"
-            font-size="11" fill="rgba(168,208,141,.48)">sau 5 tuần PM</text>
-        </svg>
+      <div class="visual">
+        <div class="glass b-wrap">
+          <div class="b-title">Kết quả · T. Tuyến · Cohort 1</div>
+          <div class="b-grid">
+            <div class="b-col before">
+              <div class="b-tag">TRƯỚC PM</div>
+              <div class="b-num">10–12%</div>
+              <div class="b-sub">Net margin<br>profit đứng yên</div>
+            </div>
+            <div class="b-arrow">→</div>
+            <div class="b-col after">
+              <div class="b-tag">SAU PM</div>
+              <div class="b-num">+46%</div>
+              <div class="b-sub">Net profit<br>↑ trong ~1 tháng</div>
+            </div>
+          </div>
+          <div class="b-foot"><span class="fk">Net margin</span><span class="fv">~20% · ×2</span></div>
+          <div class="b-foot tight"><span class="fk">Revenue</span><span class="fv">+21%</span></div>
+          <div class="b-attr">Số liệu thật từ account học viên · 5 tuần</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1209,7 +1246,7 @@
 </section>
 
 <!-- ─── SOLUTION ──────────────────────────────────── -->
-<section class="section section-green">
+<section class="section section-green" id="program">
   <div class="container">
     <span class="tag">Giải pháp</span>
     <h2>GreenWay Profit Maximizer</h2>
@@ -1341,7 +1378,7 @@
 </section>
 
 <!-- ─── TESTIMONIALS ──────────────────────────────── -->
-<section class="section">
+<section class="section" id="results">
   <div class="container">
     <span class="tag">Học viên nói gì</span>
     <h2>Kết quả thật — Số liệu thật</h2>
@@ -1492,7 +1529,7 @@
 </section>
 
 <!-- ─── COACH ──────────────────────────────────────── -->
-<section class="section section-alt">
+<section class="section section-alt" id="coach">
   <div class="container">
     <span class="tag">Về Coach</span>
     <h2>Người đã fix chính business của mình trước</h2>
@@ -1572,7 +1609,7 @@
 </section>
 
 <!-- ─── FAQ ───────────────────────────────────────── -->
-<section class="section section-alt">
+<section class="section section-alt" id="faq">
   <div class="container">
     <span class="tag">FAQ</span>
     <h2>Câu hỏi thường gặp</h2>
