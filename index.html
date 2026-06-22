@@ -744,6 +744,59 @@
     }
     @media (max-width: 640px) { .sticky-cta { display: flex; } }
 
+    /* ─── MOBILE CONVERSION FIXES ───────────────────── */
+    @media (max-width: 640px) {
+      /* Clearance cho sticky bottom bar — footer tối nối liền, không hở dải trắng */
+      .footer { padding-bottom: 84px; }
+
+      /* Coach stat band: bỏ divider dọc, 3 stat thành 1 hàng grid gọn */
+      .coach-stats {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px !important;
+        text-align: center;
+      }
+      .coach-stats .vdiv { display: none; }
+      .coach-stats > div > div:first-child { font-size: 20px !important; }
+      .coach-stats > div > div:last-child { font-size: 11px !important; line-height: 1.3; }
+
+      /* Bảng so sánh → stack thành card từng dòng, full-width */
+      .compare-table thead { display: none; }
+      .compare-table, .compare-table tbody, .compare-table tr, .compare-table td { display: block; width: 100%; }
+      .compare-table tr {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 14px;
+        overflow: hidden;
+        background: var(--white);
+      }
+      .compare-table tbody td {
+        text-align: left !important;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 16px;
+        white-space: normal;
+      }
+      .compare-table tbody td:last-child { border-bottom: none; }
+      .compare-table tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-family: var(--font-head);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 4px;
+      }
+      .compare-table tbody td:first-child {
+        background: var(--green-bg);
+        color: var(--gray-dark);
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .compare-table tbody td:first-child::before { color: var(--gray); }
+    }
+
     /* ─── HERO GRID ─────────────────────────────────── */
     .hero-grid {
       display: grid;
@@ -782,8 +835,14 @@
     .lb-img-wrap img { max-height: 90vh; max-width: 100%; object-fit: contain; border-radius: 8px; }
 
     /* ─── YOUTUBE THUMBNAIL ─────────────────────────── */
-    .yt-thumb { position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; background: #000; margin-top: 16px; }
-    .yt-thumb img { width: 100%; display: block; opacity: .85; transition: opacity .2s; }
+    .yt-thumb { position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; background: #1a1a1a; margin-top: 16px; aspect-ratio: 16 / 9; }
+    .yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92; transition: opacity .2s; }
+    .yt-thumb .yt-caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.78));
+      color: #fff; font-family: var(--font-head); font-weight: 600;
+      font-size: 13px; padding: 24px 14px 12px; pointer-events: none;
+    }
     .yt-thumb:hover img { opacity: 1; }
     .yt-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
     .yt-play-btn {
@@ -799,6 +858,31 @@
     /* ─── LIGHTBOX EXPAND HINT ──────────────────────── */
     .expandable { cursor: zoom-in; transition: opacity .2s; }
     .expandable:hover { opacity: .9; }
+
+    /* ─── PROOF IMAGE CALLOUT ───────────────────────── */
+    .proof-img-wrap { position: relative; display: block; }
+    .proof-callout {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: rgba(46,94,26,.94);
+      color: #fff;
+      font-family: var(--font-data);
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.15;
+      padding: 7px 13px;
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.28);
+      pointer-events: none;
+    }
+    .proof-callout small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      opacity: .85;
+      margin-top: 2px;
+    }
 
     /* ─── HERO CONVERSION ELEMENTS ──────────────────── */
     .hero-outcome {
@@ -915,7 +999,7 @@
         <img src="assets/Ecom Greenway Logo.png" alt="ECom GreenWay" class="nav-logo" />
       </a>
     </div>
-    <button onclick="openApplyModal()" class="btn btn-primary nav-cta">Đăng ký tư vấn</button>
+    <button onclick="openApplyModal()" class="btn btn-gold nav-cta">Nộp hồ sơ →</button>
   </div>
 </nav>
 
@@ -950,7 +1034,7 @@
         <svg viewBox="0 0 340 216" xmlns="http://www.w3.org/2000/svg"
           style="width:100%;max-width:380px"
           role="img"
-          aria-label="Kết quả Tạ Trung Tuyến trước và sau Profit Maximizer: Net Margin từ 10–12% lên ~20%, Net Profit +46%, Revenue +21%">
+          aria-label="Kết quả T. T. Tuyến trước và sau Profit Maximizer: Net Margin từ 10–12% lên ~20%, Net Profit +46%, Revenue +21%">
 
           <!-- TOP LABEL -->
           <text x="170" y="13" text-anchor="middle"
@@ -1287,12 +1371,15 @@
           <div class="testi-author">Mai — vận hành Team Mr. Hoàn</div>
           <div class="testi-role">Amazon FBA Seller · Doanh thu $10K+/tháng · Từng lãi dưới 5%</div>
           <div class="yt-thumb" onclick="openLBVideo('W5BztD5Zl5s')">
-            <img src="https://img.youtube.com/vi/W5BztD5Zl5s/hqdefault.jpg" alt="Video testimonial Team Mr. Hoàn" loading="lazy">
+            <img src="https://img.youtube.com/vi/W5BztD5Zl5s/hqdefault.jpg" alt="Video testimonial Team Mr. Hoàn"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='https://img.youtube.com/vi/W5BztD5Zl5s/0.jpg'">
             <div class="yt-play">
               <div class="yt-play-btn">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
+            <div class="yt-caption">▶ Xem Mai (Team Hoàn) chia sẻ trên video</div>
           </div>
         </div>
       </div>
@@ -1317,9 +1404,12 @@
         </div>
         <div class="testi-body">
           <p class="testi-quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
-          <div class="testi-author">Tạ Trung Tuyến</div>
+          <div class="testi-author">T. T. Tuyến</div>
           <div class="testi-role">Amazon Seller ~2 năm · Net margin từ 10–12% lên ~20%</div>
-          <img src="assets/tuyen-result-pm1.webp" alt="Kết quả Team Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.webp','Kết quả Team Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;margin-top:16px;border:1px solid var(--border);display:block" />
+          <div class="proof-img-wrap" style="margin-top:16px">
+            <img src="assets/tuyen-result-pm1.webp" alt="Kết quả T. T. Tuyến sau 1 tháng — Revenue +21%, Net Profit +46%" loading="lazy" class="expandable" onclick="openLBImg('assets/tuyen-result-pm1.webp','Kết quả T. T. Tuyến — Revenue +21%, Net Profit +46%')" style="width:100%;border-radius:6px;border:1px solid var(--border);display:block" />
+            <span class="proof-callout">Net Profit +46%<small>sau ~1 tháng</small></span>
+          </div>
         </div>
       </div>
     </div>
@@ -1343,29 +1433,29 @@
       </thead>
       <tbody>
         <tr>
-          <td>"Doanh số tăng = đang ổn"</td>
-          <td>Doanh số tăng mà profit giảm = càng bán càng lỗ</td>
-          <td class="yes-cell" style="text-align:left">Profit-First System: audit 3 tầng + phân loại 3S</td>
+          <td data-label="Bạn đang nghĩ">"Doanh số tăng = đang ổn"</td>
+          <td data-label="Sự thật">Doanh số tăng mà profit giảm = càng bán càng lỗ</td>
+          <td class="yes-cell" style="text-align:left" data-label="Profit Maximizer dạy">Profit-First System: audit 3 tầng + phân loại 3S</td>
         </tr>
         <tr>
-          <td>"Dashboard tệ thì tắt, ổn thì tăng"</td>
-          <td>Không có cadence = không có kiểm soát</td>
-          <td class="yes-cell" style="text-align:left">Weekly Decision Log + Review Rhythm (30 phút/tuần)</td>
+          <td data-label="Bạn đang nghĩ">"Dashboard tệ thì tắt, ổn thì tăng"</td>
+          <td data-label="Sự thật">Không có cadence = không có kiểm soát</td>
+          <td class="yes-cell" style="text-align:left" data-label="Profit Maximizer dạy">Weekly Decision Log + Review Rhythm (30 phút/tuần)</td>
         </tr>
         <tr>
-          <td>"ACOS cao thì negative thôi"</td>
-          <td>Negative theo cảm giác = cắt luôn cơ hội</td>
-          <td class="yes-cell" style="text-align:left">Negative Candidate List (Draft → Review → Execute)</td>
+          <td data-label="Bạn đang nghĩ">"ACOS cao thì negative thôi"</td>
+          <td data-label="Sự thật">Negative theo cảm giác = cắt luôn cơ hội</td>
+          <td class="yes-cell" style="text-align:left" data-label="Profit Maximizer dạy">Negative Candidate List (Draft → Review → Execute)</td>
         </tr>
         <tr>
-          <td>"Ads không hiệu quả → đổi chiến lược Ads"</td>
-          <td>Foundation yếu thì Ads nào cũng đốt tiền</td>
-          <td class="yes-cell" style="text-align:left">Pre-Ads Gate Checklist + Keyword Gap — sửa đòn bẩy lớn nhất trước</td>
+          <td data-label="Bạn đang nghĩ">"Ads không hiệu quả → đổi chiến lược Ads"</td>
+          <td data-label="Sự thật">Foundation yếu thì Ads nào cũng đốt tiền</td>
+          <td class="yes-cell" style="text-align:left" data-label="Profit Maximizer dạy">Pre-Ads Gate Checklist + Keyword Gap — sửa đòn bẩy lớn nhất trước</td>
         </tr>
         <tr>
-          <td>"Keyword win → tăng budget ngay"</td>
-          <td>Chưa stop bleed thì chưa được scale</td>
-          <td class="yes-cell" style="text-align:left">Scale Winner Draft List + bid/budget rules (≤25%/lần, 7–14 ngày data)</td>
+          <td data-label="Bạn đang nghĩ">"Keyword win → tăng budget ngay"</td>
+          <td data-label="Sự thật">Chưa stop bleed thì chưa được scale</td>
+          <td class="yes-cell" style="text-align:left" data-label="Profit Maximizer dạy">Scale Winner Draft List + bid/budget rules (≤25%/lần, 7–14 ngày data)</td>
         </tr>
       </tbody>
     </table>
@@ -1378,7 +1468,7 @@
   <div class="container">
     <span class="tag">Dành cho ai</span>
     <h2>Chương trình này phù hợp với bạn không?</h2>
-    <p class="lead" style="max-width:700px;margin-bottom:32px">Amazon Sellers doanh số <strong style="color:var(--gray-dark)">$10K–$50K/tháng</strong> — đang chảy máu lợi nhuận vì Ads và muốn xây <strong style="color:var(--gray-dark)">hệ thống ra quyết định theo data</strong> thay vì firefighting mỗi ngày.</p>
+    <p class="lead" style="max-width:700px;margin-bottom:32px">Amazon Sellers doanh số <strong style="color:var(--gray-dark)">$10K–$50K/tháng</strong> ở giai đoạn <strong style="color:var(--gray-dark)">"Người chiến đấu"</strong> — biết đang mất tiền nhưng chưa rõ mất ở đâu, muốn xây <strong style="color:var(--gray-dark)">hệ thống ra quyết định theo data</strong> thay vì firefighting mỗi ngày.</p>
     <div class="fit-grid">
       <div class="fit-box yes">
         <h3>Phù hợp nếu bạn...</h3>
@@ -1421,17 +1511,17 @@
           <div class="badge">The Rising Voice 2025</div>
           <div class="badge">5+ năm thực chiến</div>
         </div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:20px;padding:16px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--border)">
+        <div class="coach-stats" style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:20px;padding:16px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--border)">
           <div>
             <div style="font-family:var(--font-data);font-size:24px;font-weight:600;color:var(--green)">+130%</div>
             <div style="font-size:12px;color:var(--gray)">Net Profit MTD T3/2026</div>
           </div>
-          <div style="width:1px;background:var(--border);flex-shrink:0"></div>
+          <div class="vdiv" style="width:1px;background:var(--border);flex-shrink:0"></div>
           <div>
             <div style="font-family:var(--font-data);font-size:24px;font-weight:600;color:var(--green)">5+ năm</div>
             <div style="font-size:12px;color:var(--gray)">Amazon Seller thực chiến</div>
           </div>
-          <div style="width:1px;background:var(--border);flex-shrink:0"></div>
+          <div class="vdiv" style="width:1px;background:var(--border);flex-shrink:0"></div>
           <div>
             <div style="font-family:var(--font-data);font-size:24px;font-weight:600;color:var(--green)">SPN</div>
             <div style="font-size:12px;color:var(--gray)">Amazon Service Provider Network</div>
@@ -1450,7 +1540,10 @@
         </div>
         <div style="margin-top:16px">
           <div style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Sellerboard thực tế — Net Profit T1–T3/2026</div>
-          <img src="assets/sellerboard-t3-2026.webp" alt="Sellerboard Dashboard Net Profit +130% MTD tháng 3/2026" loading="lazy" class="expandable" onclick="openLBImg('assets/sellerboard-t3-2026.webp','Sellerboard — Net Profit +130% MTD T3/2026 · +234.9% T2/2026 · +69.6% T1/2026')" style="width:100%;border-radius:6px;border:1px solid var(--border);display:block;cursor:zoom-in" />
+          <div class="proof-img-wrap">
+            <img src="assets/sellerboard-t3-2026.webp" alt="Sellerboard Dashboard Net Profit +130% MTD tháng 3/2026" loading="lazy" class="expandable" onclick="openLBImg('assets/sellerboard-t3-2026.webp','Sellerboard — Net Profit +130% MTD T3/2026 · +234.9% T2/2026 · +69.6% T1/2026')" style="width:100%;border-radius:6px;border:1px solid var(--border);display:block;cursor:zoom-in" />
+            <span class="proof-callout">Net Profit +130%<small>MTD T3/2026 · Sellerboard thật</small></span>
+          </div>
           <p style="font-size:12px;color:var(--gray);margin-top:6px;font-family:var(--font-data)">MTD T3/2026: +130.3% · T1/2026: +69.6% (so sánh cùng kỳ năm trước)</p>
         </div>
       </div>
@@ -1527,7 +1620,7 @@
           <span class="icon">+</span>
         </button>
         <div class="faq-a">
-          5 tuần đủ để tạo <strong>thay đổi đo được đầu tiên</strong> và xây hệ thống ra quyết định theo tuần. Nếu cần, có thêm 2 tuần bổ sung. Sau Profit Maximizer, bước tiếp là Profit System hoặc Profit Scale — tùy năng lực và cam kết.
+          5 tuần đủ để tạo <strong>thay đổi đo được đầu tiên</strong> và xây hệ thống ra quyết định theo tuần. Nếu cần, có thêm 2 tuần bổ sung. Sau Profit Maximizer, bước tiếp trong lộ trình là Profit System rồi Profit Architect — tùy giai đoạn, năng lực và cam kết.
         </div>
       </div>
     </div>
@@ -1539,38 +1632,38 @@
   <div class="container">
     <span class="tag">Vị trí trong lộ trình EGW</span>
     <h2>Profit Maximizer nằm ở đâu trong lộ trình của bạn?</h2>
-    <p>Chương trình này là bước 3 trong hệ thống đào tạo GreenWay — dành cho seller đã có sản phẩm và cần kiểm soát lợi nhuận.</p>
+    <p>EGW chia hành trình seller thành 5 giai đoạn. Profit Maximizer dành cho giai đoạn <strong style="color:var(--gray-dark)">Growing — "Người chiến đấu"</strong>: bạn đã có sản phẩm bán ra nhưng đang <em>mất tiền mù</em> vì Ads. PM đưa bạn qua "Thung Lũng Chết" — từ mất tiền mù sang <strong style="color:var(--gray-dark)">kiểm soát được profit leak</strong> — để bước sang giai đoạn Emerging.</p>
 
     <div class="journey">
-      <h3>Hành trình Scaling Seller trên GreenWay</h3>
+      <h3>Hành trình Seller trên GreenWay</h3>
       <div class="journey-steps">
         <div class="j-step" style="opacity:.5">
-          <div class="step-num">STEP 1</div>
-          <div class="step-name">GreenWay Product Research Lab</div>
-          <div class="step-desc">New Seller · Group · 4 tuần</div>
-        </div>
-        <div class="j-step" style="opacity:.5">
-          <div class="step-num">STEP 2</div>
-          <div class="step-name">GreenWay Launch Mentorship</div>
-          <div class="step-desc">1:1 · 4–5 tháng</div>
+          <div class="step-num">GIAI ĐOẠN 1</div>
+          <div class="step-name">GreenWay Kickstart</div>
+          <div class="step-desc">Explorer · "Người tìm kiếm"</div>
         </div>
         <div class="j-step active">
-          <div class="step-num">STEP 3</div>
+          <div class="step-num">GIAI ĐOẠN 2</div>
           <div class="step-name">
             GreenWay Profit Maximizer
             <span class="you-are-here">Bạn đang ở đây</span>
           </div>
-          <div class="step-desc">Hybrid · 5 tuần</div>
+          <div class="step-desc">Growing · "Người chiến đấu"</div>
         </div>
         <div class="j-step" style="opacity:.5">
-          <div class="step-num">STEP 4</div>
+          <div class="step-num">GIAI ĐOẠN 3</div>
           <div class="step-name">GreenWay Profit System</div>
-          <div class="step-desc">Hệ thống profitable toàn diện</div>
+          <div class="step-desc">Emerging · "Người xây dựng"</div>
         </div>
         <div class="j-step" style="opacity:.5">
-          <div class="step-num">STEP 5</div>
-          <div class="step-name">GreenWay Profit Scale</div>
-          <div class="step-desc">Scale có kiểm soát</div>
+          <div class="step-num">GIAI ĐOẠN 4</div>
+          <div class="step-name">GreenWay Profit Architect</div>
+          <div class="step-desc">Achiever · "Người vận hành"</div>
+        </div>
+        <div class="j-step" style="opacity:.5">
+          <div class="step-num">GIAI ĐOẠN 5</div>
+          <div class="step-name">GreenWay Club</div>
+          <div class="step-desc">Master · "Người dẫn dắt"</div>
         </div>
       </div>
     </div>
@@ -1622,7 +1715,7 @@
       <div class="contact-item">
         <div>
           <div class="label">Email</div>
-          <a href="mailto:ngocbinhls@gmail.com">ngocbinhls@gmail.com</a>
+          <a id="contact-email" href="#" data-u="ngocbinhls" data-d="gmail.com">[bấm để hiện email]</a>
         </div>
       </div>
       <div class="contact-item">
@@ -1726,8 +1819,14 @@
   }
 
   function openLBVideo(id) {
+    // origin giúp YouTube xác thực domain nhúng → tránh "Error 153 player config".
+    var src = 'https://www.youtube-nocookie.com/embed/' + id
+      + '?autoplay=1&rel=0&playsinline=1&modestbranding=1'
+      + '&origin=' + encodeURIComponent(window.location.origin);
     document.getElementById('lb-content').innerHTML =
-      '<div class="lb-video"><iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>';
+      '<div class="lb-video"><iframe src="' + src + '" '
+      + 'allow="autoplay; encrypted-media; picture-in-picture; fullscreen" '
+      + 'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1752,6 +1851,15 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeLB();
   });
+
+  // Email obfuscation — ghép địa chỉ bằng JS để bot quét spam không đọc được trong HTML thô.
+  (function () {
+    var a = document.getElementById('contact-email');
+    if (!a) return;
+    var addr = a.dataset.u + '@' + a.dataset.d;
+    a.href = 'mailto:' + addr;
+    a.textContent = addr;
+  })();
 </script>
 </body>
 </html>
